@@ -18,7 +18,7 @@ http://love-oriented.com/pack/
 * 121	Best Time to Buy and Sell Stock	35.2%	Medium
 只有一次机会
 
-dp(n)表示一个算法，其结果类型为(i:Int, j:Int)表示买入和卖出点坐标，使之对任意0<=i1<=j1<=n，有arr(j) - arr(i) >= arr(j1) - arr(i1)
+dp(n)表示一个算法，其结果类型为(i:Int, j:Int)表示买入和卖出点坐标，其中i<=j，使之对任意0<=i1<=j1<=n，有arr(j) - arr(i) >= arr(j1) - arr(i1)
 
 保留两个值，local最大值和global最大值，如果local大于global，则使用local的替换global的
 这里local是指以arr(n)为卖出点的最大值，只要拿当前值减去当前遇到的最小值即可
@@ -46,40 +46,9 @@ def bestTransaction(prices: Array[Int]): (Int, Int, Int) = {
 }
 
 * 122	Best Time to Buy and Sell Stock II	41.3%	Medium
-不限次数
+不限次数，就把每一次上涨都包括进来
 
-
-
-
-
-
-
-* 123	Best Time to Buy and Sell Stock III	25.6%	Hard
-* 122	Best Time to Buy and Sell Stock II	41.3%	Medium
-* 121	Best Time to Buy and Sell Stock	35.2%	Medium
-
-Best Time to Buy and Sell Stock
-
-
-def best(prices: Array[Int]): (Int, Int) = {
-  // state : startIndex and value
-  val state = Array.fill[(Int, Int)](prices.length)((0, 0))
-  for (i <- 1 until prices.length) {
-    if (prices(i) > prices(state(i - 1)._1)) {
-      state(i) = (state(i - 1)._1, state(i - 1)._2 - prices(i - 1) + prices(i))
-    } else {
-      state(i) = (i, 0)
-    }
-  }
-  state.maxBy(_._2)
-}
-
-best(Array(1, 0, 3, 4, 8, 6, 7, 4, 9, 3, 2))
-
-Best Time to Buy and Sell Stock II
-不限机会
-def best2(prices: Array[Int]): (Int, List[(Int, Int)]) = {
-  // state : startIndex and value
+def bestTransactions(prices: Array[Int]): (Int, List[(Int, Int)]) = {
   var profit = 0
   var startidx = 0
   var seq = List[(Int, Int)]()
@@ -96,7 +65,53 @@ def best2(prices: Array[Int]): (Int, List[(Int, Int)]) = {
   (profit, seq)
 }
 
-best2(Array(1, 0, 3, 4, 8, 6, 7, 4, 9, 3, 2))
+* 123 Best Time to Buy and Sell Stock III 25.6% Hard
+2次机会
+
+dp(n)表示一个算法，其结果类型为(i1:Int, j1:Int, i2:Int, j2:Int)表示两次买入和卖出点坐标，其中i1<=j1<=i2<=j2，使之对任意0<=a1<=b1<=a2<=b2<=n，有arr(j1) - arr(i1) + arr(j2) - arr(i2) >= arr(b1) - arr(a1) + arr(b2) - arr(a2)
+
+和只有一次机会[121](#121)类似，保留两个值，local最大值和global最大值，如果local大于global，则使用local的替换global的
+这里local是指以arr(n)为卖出点的最大值，只要拿当前值减去当前遇到的最小值即可
+
+curMin 表示当前遇到的最小值坐标 currentMinIndex，可以知道必有curMin = i1或curMin = i2或curMin > j2，可以反证法说明。
+
+计算当前最大值arr(n) - arr(curMin) v，记前两个是v1 v2
+if(curMin > i2) {
+  if( v > min(v1, v2)) {
+    max(v1, v2) + v
+  }
+}
+
+if(curMin == i2) {
+  if(v > v2) {
+    v1 + v
+  }
+}
+
+if(curMin == i1) {
+  if()
+}
+
+
+if(v > v1 + v2) {
+  if(curMin > i2) {
+    max(v1, v2) + v
+  } else if(curMin == v2) {
+    v1 + v
+  } else if(curMin == v1) {
+    v
+  }
+} else if(v > v2) {
+  
+}
+
+
+dp(n) = 
+        curMin = if(arr(n) < arr(curMin)) n else curMin 
+        if(arr(n) - arr(curMin) < arr(dp(n - 1)._2) - arr(dp(n - 1)._1))
+          dp(n - 1)
+        else
+          (curMin, n)
 
 
 
