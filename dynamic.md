@@ -36,7 +36,7 @@ def maxSub(arr: Array[Int]) : Int = {
 
 * 152	Maximum Product Subarray	21.5%	Medium
 题目要求是Array[Int]，所以比较简单，只需关注上一个值是否为0即可。
-待验证
+TODO
 
 ```
 def maxProd(arr: Array[Int]) : Int = {
@@ -62,13 +62,11 @@ maxProd(Array(-2, 0, -3, 0, -1, 0))
 maxProd(Array(-3))
 ```
 
+如果是double呢？
 
 
 
 
-
-Triangle
-类似Maximum Subarray
 
 
 
@@ -309,32 +307,93 @@ def minpath(matrix: Array[Array[Int]]) : Int = {
 }
 ```
 
+* 120	Triangle	29.3%	Medium
+给定带权三角，求其从定点到底边权值最小的路径，与上题类似
+
+```
+dp[i][j] = min(dp[i - 1][j - 1] + dp[i - 1][j]) + triangle[i][j]
+```
+
+```
+def minpath(triangle: Array[Array[Int]]) : Int = {
+  val state = Array.fill(triangle(triangle.length - 1).length)(0)
+  state(0) = triangle(0)(0)
+
+  for(
+    i <- 1 until triangle.length;
+    j <- i to 0 by -1
+  ) {
+    if(j == 0) state(j) = triangle(i)(j) + state(j)
+    else if(j == triangle(i).length - 1) state(j) = triangle(i)(j) + state(j - 1)
+    else state(j) = triangle(i)(j) + min(state(j - 1), state(j))
+  }
+  state.min
+}
+
+val tri = Array(Array(2),Array(3,4),Array(6,5,7),Array(4,1,8,3))
+
+tri.deep
+minpath(tri)
+```
 
 
+96	Unique Binary Search Trees	36.8%	Medium
+存储1到n的二叉树有多少种。
+
+令dp(n)表示包含n个节点的BST数量
+令f(k, n)表示以k为根节点且包含n个节点的BST数量，则
+
+```
+dp(n) = f(1, n) + dp(2, n) + ... + f(n)
+      = dp(n - 1) * dp(0) + dp(n - 2) * dp(1) + ... + dp(0) * dp(n - 1)
+其中dp(0) = 1, dp(1) = 1
+```
+
+```
+def uniqBST(n : Int) : Int = {
+  val state = Array.fill(n + 1)(0)
+  state(0) = 1
+  state(1) = 1
+
+  for(
+    i <- 2 to n;
+    j <- 0 until i
+  ) state(i) = state(i) + state(j) * state(i - j - 1)
+  state(n)
+}
+```
 
 
-
-Unique Binary Search Trees
-Unique Binary Search Trees II
+95	Unique Binary Search Trees II	28.8%	Medium
+将树生成出来
 todo
 
-Perfect Squares
-背包问题
+279	Perfect Squares	31.2%	Medium
+
+动态规划：从新手到专家
+http://www.hawstein.com/posts/dp-novice-to-advanced.html
+https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/
 
 
+dp(n) = for(x <- squares(n)) to 1) min(1 + dp(n - x))
 
+```
+def squares(n: Int): List[Int] = {
+  var i = 2
+  var list = List(1)
+  while (i * i <= n) {
+    list = i * i :: list
+    i = i + 1
+  }
+  list
+}
 
+def perfSquare(n: Int): Int = {
+  val sq = squares(n)
+  if (sq.head == n) 1
+  else sq.foldLeft(n) { (x, v) => min(perfSquare(n - v) + 1, x) }
+}
 
-
-
-
-
-
-
-
-
-
-
-
+```
 
 

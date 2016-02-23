@@ -416,15 +416,40 @@ arr(initIndex) + "->" + lastValue :: list reverse
 
 
 
+* 118	Pascal's Triangle	32.4%	Easy
+帕斯卡三角可以从上一个Array的状态推出下一个Array的状态
+```
+  @tailrec
+  def getTriRecur(n: Int, res: List[Array[Int]]): List[Array[Int]] = {
+    if (n == 0) res
+    else getTriRecur(n - 1, genNext(res.head) :: res)
+  }
 
+  def genNext(last: Array[Int]): Array[Int] = {
+    val arr = Array.fill(last.length + 1)(1)
+    for (i <- 1 until last.length) {
+      arr(i) = last(i - 1) + last(i)
+    }
+    arr
+  }
 
+  def getTri(n: Int): List[Array[Int]] = {
+    getTriRecur(n - 1, Array(1) :: Nil)
+  }
 
+  getTri(10).foreach(a => println(a.toList))
+```
 
-
-
-
-
-
-dyn
-119	Pascal's Triangle II	31.4%	Easy
-118	Pascal's Triangle	32.4%	Easy
+* 119	Pascal's Triangle II	31.4%	Easy
+只用一个数组，更加节省空间，这时只需要从后往前计算即可
+```
+  def getSingleTri(n: Int): Array[Int] = {
+    val arr = Array.fill(n)(0)
+    arr(n - 1) = 1
+    for (
+      i <- n - 2 to 0 by -1;
+      j <- i to n - 2
+    ) arr(j) = arr(j) + arr(j + 1)
+    arr
+  }
+```
