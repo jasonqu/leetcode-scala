@@ -1,7 +1,10 @@
-tree.md
+## Tree
 
-二叉树定义
+### 简介
 
+树是一种重要的数据结构，最简单的树就属二叉树了，在scala中定义一个二叉树很简单：
+
+```
 case class TreeNode(value: Int, left: Option[TreeNode] = None, right: Option[TreeNode] = None)
 
 val tree1 = TreeNode(1,
@@ -20,25 +23,33 @@ val tree2 =
     Some(TreeNode(22,
       Some(TreeNode(32, Some(TreeNode(43)), Some(TreeNode(44)))),
       Some(TreeNode(33, Some(TreeNode(45)), Some(TreeNode(46)))))))
+```
 
-def max(a: Int, b: Int): Int = if (a > b) a else b
-def min(a: Int, b: Int): Int = if (a > b) b else a
+注意这里的子节点使用的是`Option[TreeNode]`，如果值为`None`则表示没有这个子节点；如果两个子节点都是`None`则表示该节点为叶子节点。
 
+### 递归分治
 
+树的结构决定了可以自然地使用递归分治方式来解决其问题：
 
-* 104	Maximum Depth of Binary Tree	47.1%	Easy
+#### 104	Maximum Depth of Binary Tree	47.1%	Easy
+最大深度
 
-def maxdepth(root: Option[TreeNode]): Int = root match {
-  case None => 0
-  case Some(node) => max(maxdepth(node.left), maxdepth(node.right)) + 1
-}
+  def maxdepth(root: Option[TreeNode]): Int = root match {
+    case None => 0
+    case Some(node) => max(maxdepth(node.left), maxdepth(node.right)) + 1
+  }
 
-* 111 Minimum Depth of Binary Tree  30.2% Easy
+  maxdepth(Some(tree1))
+  maxdepth(Some(tree2))
+
+#### 111 Minimum Depth of Binary Tree  30.2% Easy
+最小深度
 
 * 叶子节点，返回当前深度
 * 只有左|右子树，返回子树深度
 * 否则，返回较矮的深度
 
+```
 def mindepth(root: Option[TreeNode], curdep: Int): Int = root match {
   case None => Int.MaxValue
   case Some(node) =>
@@ -48,16 +59,14 @@ def mindepth(root: Option[TreeNode], curdep: Int): Int = root match {
     if(depth == Int.MaxValue) curdep else depth
 }
 
-maxdepth(Some(tree1))
-maxdepth(Some(tree2))
-
 mindepth(Some(tree1), 1)
 mindepth(Some(tree2), 1)
+```
 
+#### 102	Binary Tree Level Order Traversal	31.7%	Easy
+BFS广度优先，这里可以利用Option的特性简化代码
 
-* 102	Binary Tree Level Order Traversal	31.7%	Easy
-BFS广度优先，这里利用Option的特性简化代码
-
+```
 def levelTraverse(root: TreeNode): List[List[Int]] = {
   levelTraverseRec(List(root), List(root.value) :: Nil)
 }
@@ -73,19 +82,21 @@ def levelTraverseRec(parents: List[TreeNode], res: List[List[Int]]): List[List[I
 
 levelTraverse(tree1)
 levelTraverse(tree2)
+```
 
-* 107 Binary Tree Level Order Traversal II  33.1% Easy
+#### 107 Binary Tree Level Order Traversal II  33.1% Easy
 上面结果reverse一下
 当然如果按照完全二叉树，存到数组的话 Given binary tree {3,9,20,#,#,15,7}，
-使用下标的方式也可以获取，完全二叉树特性，todo
+使用下标的方式也可以获取，完全二叉树特性，
+todo
 
-* 103	Binary Tree Zigzag Level Order Traversal	27.9%	Medium
+#### 103	Binary Tree Zigzag Level Order Traversal	27.9%	Medium
 增加一个奇偶判断是否需要reverse即可，略
 
-
-* 101	Symmetric Tree	33.3%	Easy
+#### 101	Symmetric Tree	33.3%	Easy
 对称树
 
+```
 def isSymmetric(rootLeft: Option[TreeNode], rootRight: Option[TreeNode]): Boolean = (rootLeft, rootRight) match {
   case (None, None) => true
   case (None, _) | (_, None)=> false
@@ -93,14 +104,17 @@ def isSymmetric(rootLeft: Option[TreeNode], rootRight: Option[TreeNode]): Boolea
     if(left.value != right.value) false
     else isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right)
 }
+```
 
-* 100	Same Tree	42.7%	Easy
-和上题类似
+#### 100	Same Tree	42.7%	Easy
+和上题类似，略
 
-* 110	Balanced Binary Tree	33.4%	Easy
+#### 110	Balanced Binary Tree	33.4%	Easy
 子树高度差不能大于1
 
-子树深度，是否是平衡树，使用lazy来延迟求值，并使用布尔变量来做short circuit
+使用字段保存“子树深度”，“是否是平衡树”；使用lazy来延迟求值，并使用布尔变量来做short circuit
+
+```
 def isBalanced(root: Option[TreeNode]): (Int, Boolean) = root match {
   case None => (Int, true)
   case Some(node) =>
@@ -111,34 +125,40 @@ def isBalanced(root: Option[TreeNode]): (Int, Boolean) = root match {
     else
       (0, false)
 }
+```
 
+todo dfs 说明
 以下题目都可以从dfs得出，与上面类似，这里从略
-* 112	Path Sum	30.8%	Easy
+#### 112	Path Sum	30.8%	Easy
 value之和 等于 给定值 的树的路径
 
-* 113	Path Sum II	27.7%	Medium
+#### 113	Path Sum II	27.7%	Medium
 所有 value之和 等于 给定值 的树的路径
 
-* 257	Binary Tree Paths	26.9%	Easy
+#### 257	Binary Tree Paths	26.9%	Easy
 返回所有路径
 
-* 129	Sum Root to Leaf Numbers	32.0%	Medium
+#### 129	Sum Root to Leaf Numbers	32.0%	Medium
 返回所有路径 所代表的数字之和
 
 
+### 基本操作
 
-* 94	Binary Tree Inorder Traversal	38.6%	Medium
-* 144	Binary Tree Preorder Traversal	38.8%	Medium
-* 145	Binary Tree Postorder Traversal	34.6%	Hard
-递归方式很简单，从略。iteratively 方式不是functional的长项，此处从略
+遍历
+#### 94	Binary Tree Inorder Traversal	38.6%	Medium
+#### 144	Binary Tree Preorder Traversal	38.8%	Medium
+#### 145	Binary Tree Postorder Traversal	34.6%	Hard
+递归方式很简单，从略。
+iteratively 方式不是functional的长项，此处从略
 
 
-* 106	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
-* 105	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
+#### 106	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
+#### 105	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
 略
 
+### 修改树
 
-* 114	Flatten Binary Tree to Linked List	30.4%	Medium
+#### 114	Flatten Binary Tree to Linked List	30.4%	Medium
 给定一棵树，按照前序遍历转为List
 
 def flatternTree(root: Option[TreeNode]): List[Int] = root match {
