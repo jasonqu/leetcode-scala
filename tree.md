@@ -27,9 +27,36 @@ val tree2 =
 
 注意这里的子节点使用的是`Option[TreeNode]`，如果值为`None`则表示没有这个子节点；如果两个子节点都是`None`则表示该节点为叶子节点。
 
+### 基本操作
+
+遍历是树最基本的算法了，了解树首先要从前序、中序、后序遍历开始：
+
+#### 94 Binary Tree Inorder Traversal 38.6% Medium
+#### 144  Binary Tree Preorder Traversal  38.8% Medium
+#### 145  Binary Tree Postorder Traversal 34.6% Hard
+递归方式很简单：
+
+  def traverse(root: Option[TreeNode]): Void = root match {
+    case None => Void
+    case Some(node) => 
+        println(node.value) // Preorder
+        traverse(node.left)
+        println(node.value) // Inorder
+        traverse(node.right)
+        println(node.value) // Postorder
+  }
+
+当然作为scala可以传入针对TreeNode或其Value的处理函数即可。
+
+题目还要求实现迭代版本，不过这不是函数式的长项，此处从略
+
+#### 106  Construct Binary Tree from Inorder and Postorder Traversal  28.4% Medium
+#### 105  Construct Binary Tree from Preorder and Inorder Traversal 27.9% Medium
+略
+
 ### 递归分治
 
-树的结构决定了可以自然地使用递归分治方式来解决其问题：
+树的结构决定了可以自然地使用递归分治方式来解决问题：要求解一个问题，如果能够分别解出左右子树的问题，然后在本节点加以综合即可。
 
 #### 104	Maximum Depth of Binary Tree	47.1%	Easy
 最大深度
@@ -142,19 +169,7 @@ value之和 等于 给定值 的树的路径
 返回所有路径 所代表的数字之和
 
 
-### 基本操作
 
-遍历
-#### 94	Binary Tree Inorder Traversal	38.6%	Medium
-#### 144	Binary Tree Preorder Traversal	38.8%	Medium
-#### 145	Binary Tree Postorder Traversal	34.6%	Hard
-递归方式很简单，从略。
-iteratively 方式不是functional的长项，此处从略
-
-
-#### 106	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
-#### 105	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
-略
 
 ### 修改树
 

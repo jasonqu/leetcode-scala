@@ -171,8 +171,8 @@
 * [x] 148	[list](list.md) Sort List	24.1%	Medium
 * [-] 147	[x]	Insertion Sort List	28.6%	Medium
 * [ ] 146	LRU Cache	15.7%	Hard
-* [ ] 145	Binary Tree Postorder Traversal	34.6%	Hard
-* [ ] 144	Binary Tree Preorder Traversal	38.8%	Medium
+* [x] 145	[Tree](tree.md)	Binary Tree Postorder Traversal	34.6%	Hard
+* [x] 144	[Tree](tree.md)	Binary Tree Preorder Traversal	38.8%	Medium
 * [x] 143	[list](list.md)	Reorder List	22.3%	Medium
 * [-] 142	[x]	Linked List Cycle II	31.5%	Medium
 * [-] 141	[x]	Linked List Cycle	36.8%	Medium
@@ -222,7 +222,7 @@
 * [ ] 97	Interleaving String	22.0%	Hard
 * [ ] 96	Unique Binary Search Trees	36.8%	Medium
 * [ ] 95	Unique Binary Search Trees II	28.8%	Medium
-* [ ] 94	Binary Tree Inorder Traversal	38.7%	Medium
+* [x] 94	[Tree](tree.md)	Binary Tree Inorder Traversal	38.7%	Medium
 * [ ] 93	Restore IP Addresses	22.7%	Medium
 * [x] 92	[list](list.md)	Reverse Linked List II	27.3%	Medium
 * [ ] 91	Decode Ways	17.2%	Medium
