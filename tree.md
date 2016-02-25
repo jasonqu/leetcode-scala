@@ -29,22 +29,30 @@ val tree2 =
 
 ### 基本操作
 
-遍历是树最基本的算法了，了解树首先要从前序、中序、后序遍历开始：
+遍历是树最基本的算法，了解树首先要从前序、中序、后序遍历开始：
 
 #### 94 Binary Tree Inorder Traversal 38.6% Medium
 #### 144  Binary Tree Preorder Traversal  38.8% Medium
 #### 145  Binary Tree Postorder Traversal 34.6% Hard
 递归方式很简单：
 
-  def traverse(root: Option[TreeNode]): Void = root match {
-    case None => Void
-    case Some(node) => 
-        println(node.value) // Preorder
-        traverse(node.left)
-        println(node.value) // Inorder
-        traverse(node.right)
-        println(node.value) // Postorder
-  }
+```
+def traverse(root: Option[TreeNode], f:TreeNode => Unit): Unit = root match {
+  case None => Unit
+  case Some(node) =>
+    f(node) // Preorder
+    traverse(node.left, f)
+    f(node) // Inorder
+    traverse(node.right, f)
+    f(node) // Postorder
+}
+
+val tree1 = TreeNode(1,
+  Some(TreeNode(21)),
+  Some(TreeNode(22)))
+
+traverse(Some(tree1), {t:TreeNode => println(t.value)})
+```
 
 当然作为scala可以传入针对TreeNode或其Value的处理函数即可。
 
@@ -56,7 +64,9 @@ val tree2 =
 
 ### 递归分治
 
-树的结构决定了可以自然地使用递归分治方式来解决问题：要求解一个问题，如果能够分别解出左右子树的问题，然后在本节点加以综合即可。
+树的结构决定了可以自然地使用递归分治方式来解决问题：要求解一个问题，如果能够分别解出左右子树的问题，然后在本节点加以综合即可。这时只需根据题意简单的修改一下遍历的算法即可。
+
+> 在编写树的递归算法时，不用可以寻找尾递归优化，因为编写的为递归往往也需要使用类似栈的结构保存树的路径，因此不如使用程序栈使代码会更简洁一些
 
 #### 104	Maximum Depth of Binary Tree	47.1%	Easy
 最大深度
@@ -90,8 +100,62 @@ mindepth(Some(tree1), 1)
 mindepth(Some(tree2), 1)
 ```
 
+#### 101	Symmetric Tree	33.3%	Easy
+对称树
+
+```
+def isSymmetric(rootLeft: Option[TreeNode], rootRight: Option[TreeNode]): Boolean = (rootLeft, rootRight) match {
+  case (None, None) => true
+  case (None, _) | (_, None)=> false
+  case (Some(left), Some(right)) =>
+    if(left.value != right.value) false
+    else isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right)
+}
+```
+
+这种递归的遍历方式，相当于游走了每一条从根到叶子节点的路径，类似于DFS——深度优先搜索。以下题目都可以利用这种方法得出，与上面类似，这里从略
+
+#### 100	Same Tree	42.7%	Easy
+判断两树是否相同，和#101类似，略
+
+#### 112	Path Sum	30.8%	Easy
+value之和 等于 给定值 的树的路径
+
+#### 113	Path Sum II	27.7%	Medium
+所有 value之和 等于 给定值 的树的路径
+
+#### 257	Binary Tree Paths	26.9%	Easy
+返回所有路径
+
+#### 129	Sum Root to Leaf Numbers	32.0%	Medium
+返回所有路径 所代表的数字之和
+
+对有一些问题，只要查到一个特例就可以返回结果时，可以不需要遍历后面的路径，类似的问题如#101、#100、#112。这时可以通过使用scala的lazy关键字延迟求值，并使用布尔变量来做短路求值（short circuit）。下面将以#110为例介绍一下实现方法：
+
+#### 110	Balanced Binary Tree	33.4%	Easy
+平衡二叉树要求子树高度差不能大于1，判断一棵树是否是平衡二叉树
+
+使用字段保存“子树深度”，“是否是平衡树”；然后使用lazy延迟求值，并使用布尔变量来做short circuit
+
+```
+def isBalanced(root: Option[TreeNode]): (Int, Boolean) = root match {
+  case None => (0, true)
+  case Some(node) =>
+    lazy val (leftdepth, leftb) = isBalanced(node.left)
+    lazy val (rightdepth, rightb) = isBalanced(node.right)
+    if(leftb && rightb && Math.abs(leftdepth - rightdepth) < 2)
+      (max(leftdepth, rightdepth) + 1, true)
+    else
+      (0, false)
+}
+```
+
+### 广度优先
+
+除了深度优先，另一种方式是广度优先，这种方式一般要求使用类似队列的结构来保存子节点
+
 #### 102	Binary Tree Level Order Traversal	31.7%	Easy
-BFS广度优先，这里可以利用Option的特性简化代码
+BFS广度优先遍历，这里可以利用Option的特性简化代码
 
 ```
 def levelTraverse(root: TreeNode): List[List[Int]] = {
@@ -112,61 +176,57 @@ levelTraverse(tree2)
 ```
 
 #### 107 Binary Tree Level Order Traversal II  33.1% Easy
-上面结果reverse一下
+只要将#102的结果reverse一下即可，略
+
+#### 103	Binary Tree Zigzag Level Order Traversal	27.9%	Medium
+只要增加一个奇偶判断是否需要reverse即可，略
+
+
+### 树的数组形式、完全二叉树和堆
+通过树的BFS广度优先遍历来看，可以看出一颗树可以被序列化为一个线性结构——数组。数组的好处是能够随机访问，从而提高读取和修改内容的效率。
+
+这里我们将树的数组形式定义为`Array[Option[Type of TreeNode.value]]`，前面介绍的例子`tree1`将变为：
+
+```
+tree1 = Array(1,
+              21, 22)
+
+tree2 = Array(1,
+              21, 22,
+              #, 31, 32, 33,
+              #, #, 41, 42, 43, 44, 45, 46,
+              #, #, #, #, #, #, 51, #, #, #, #, #, #, #, #, #,
+              #, #, #, #, #, #, #, #, #, #, #, #, 61, 62
+              )
+```
+
+这里使用`#`表示`None`，使用数字表示`Some[Int]`，可见有下面的规律：
+* 父节点索引：`parent(i) = (i - 1) / 2`
+* 左子节点索引：`left(i) = 2 * i + 1`
+* 右子节点索引：`right(i) = 2 * i + 2`
+
+根据`tree2`可以看到，如果是稀疏的树，其空间比链表形式存储浪费的更大，因此适合于完全二叉树来存储，就像`tree1`那样，完全没有浪费。
+
+3. Heap: creation, insertion.
+(1) Concept: nearly complete binary tree, implemented using array
+Parent-child relation: for 0-based array (A[0:n-1])
+parent(i) = (i-1)/2
+left(i) = 2*i+1
+right(i) = 2*i+2
+(2) Properties:
+Max heap: A[parent(i)] >= A[i] - heap sort
+Min heap: A[parent(i)] <= A[i] -  priority queue
+(3) Heapify: find the largest among y = {A[i], A[left(i)], A[ right(i)]}.
+If y = A[i], done; else, swap A[i] with y, and heapify y
+(4) Build max heap: for each i from heap.size/2  to 0, heapify(i).
+
+
+
+
+根据我们之前的定义
 当然如果按照完全二叉树，存到数组的话 Given binary tree {3,9,20,#,#,15,7}，
 使用下标的方式也可以获取，完全二叉树特性，
 todo
-
-#### 103	Binary Tree Zigzag Level Order Traversal	27.9%	Medium
-增加一个奇偶判断是否需要reverse即可，略
-
-#### 101	Symmetric Tree	33.3%	Easy
-对称树
-
-```
-def isSymmetric(rootLeft: Option[TreeNode], rootRight: Option[TreeNode]): Boolean = (rootLeft, rootRight) match {
-  case (None, None) => true
-  case (None, _) | (_, None)=> false
-  case (Some(left), Some(right)) =>
-    if(left.value != right.value) false
-    else isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right)
-}
-```
-
-#### 100	Same Tree	42.7%	Easy
-和上题类似，略
-
-#### 110	Balanced Binary Tree	33.4%	Easy
-子树高度差不能大于1
-
-使用字段保存“子树深度”，“是否是平衡树”；使用lazy来延迟求值，并使用布尔变量来做short circuit
-
-```
-def isBalanced(root: Option[TreeNode]): (Int, Boolean) = root match {
-  case None => (Int, true)
-  case Some(node) =>
-    lazy val (leftdepth, leftb) = isBalanced(node.left)
-    lazy val (rightdepth, rightb) = isBalanced(node.right)
-    if(leftb && rightb && Math.abs(leftdepth - rightdepth) < 2)
-      (max(leftdepth, rightdepth), true)
-    else
-      (0, false)
-}
-```
-
-todo dfs 说明
-以下题目都可以从dfs得出，与上面类似，这里从略
-#### 112	Path Sum	30.8%	Easy
-value之和 等于 给定值 的树的路径
-
-#### 113	Path Sum II	27.7%	Medium
-所有 value之和 等于 给定值 的树的路径
-
-#### 257	Binary Tree Paths	26.9%	Easy
-返回所有路径
-
-#### 129	Sum Root to Leaf Numbers	32.0%	Medium
-返回所有路径 所代表的数字之和
 
 
 
@@ -217,7 +277,6 @@ constant extra space. perfect binary tree
 * 117	Populating Next Right Pointers in Each Node II	32.6%	Hard
 constant extra space. not perfect binary tree
 > todo
-
 
 
 

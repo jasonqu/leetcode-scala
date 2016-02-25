@@ -210,8 +210,8 @@
 * [ ] 109	Convert Sorted List to Binary Search Tree	29.8%	Medium
 * [ ] 108	Convert Sorted Array to Binary Search Tree	36.3%	Medium
 * [-] 107	[Tree](tree.md)	Binary Tree Level Order Traversal II	33.1%	Easy
-* [ ] 106	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
-* [ ] 105	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
+* [-] 106	[Tree](tree.md)	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
+* [-] 105	[Tree](tree.md)	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
 * [x] 104	[Tree](tree.md)	Maximum Depth of Binary Tree	47.2%	Easy
 * [-] 103	[Tree](tree.md)	Binary Tree Zigzag Level Order Traversal	27.9%	Medium
 * [x] 102	[Tree](tree.md)	Binary Tree Level Order Traversal	31.7%	Easy
