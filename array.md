@@ -47,11 +47,6 @@ scala针对集合提供了通用操作，因此有些题目划在了array名下�
     satisfy
   }
 
-#### 287	Find the Duplicate Number	37.7%	Hard
-todo
-
-
-
 #### 169 Majority Element  39.8% Easy
 超过二分之一的元素
 
@@ -76,11 +71,7 @@ todo
 
 [二分查找](https://en.wikipedia.org/wiki/Binary_search_algorithm)是最重要的算法之一，它能在一个有序的、可以随机访问的数据结构中，以log(n)的时间查找元素
 
-scala内建了[binarysearch](https://github.com/scala/scala/blob/v2.11.0-M3/src/library/scala/collection/Searching.scala)：
-
-todo
-http://stackoverflow.com/questions/4226947/scala-replacement-for-arrays-binarysearch
-
+虽然可以[使用java内建的方法](http://stackoverflow.com/questions/4226947/scala-replacement-for-arrays-binarysearch)，但更好的方式是使用scala内建的[binarysearch](https://github.com/scala/scala/blob/v2.11.0-M3/src/library/scala/collection/Searching.scala)：
 
   import scala.collection.Searching._
   List(1, 2, 3, 4, 5).search(3)
@@ -299,8 +290,16 @@ todo
 todo
 
 #### 278	First Bad Version
-简，略
+简单，略
 
+#### 287	Find the Duplicate Number	37.7%	Hard
+一个`n+1`的数组，只包含`[1,n]`区间的数字，假设只有一个重复数，求之。
+
+要求：不能修改数组、小与O(n^2)的时间复杂度、O(1)空间复杂度、重复数字可能重复多次
+
+[这篇博文](http://bookshadow.com/weblog/2015/09/28/leetcode-find-duplicate-number/)里有详细的解法。其中比较简单的是二分法，关键是二分哪一个数组，如果直接二分目标数组，由于目标数组不是排序的，所以不能使用二分；所以需要二分的是`[1,n]`这个虚拟的数组：从中间数字`n/2`开始，遍历一遍数组，找小与等于`n/2`的数字是不是正好等于`n/2`，如果大于它则说明重复数字小与`n/2`，否则大于它；同理搜索即可。
+
+todo
 
 ### Matrix
 二维数组，就是`Array[Array[Int]]`

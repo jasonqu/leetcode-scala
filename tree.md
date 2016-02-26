@@ -130,6 +130,9 @@ value之和 等于 给定值 的树的路径
 #### 129	Sum Root to Leaf Numbers	32.0%	Medium
 返回所有路径 所代表的数字之和
 
+#### 226	Invert Binary Tree	43.7%	Easy
+翻转树
+
 对有一些问题，只要查到一个特例就可以返回结果时，可以不需要遍历后面的路径，类似的问题如#101、#100、#112。这时可以通过使用scala的lazy关键字延迟求值，并使用布尔变量来做短路求值（short circuit）。下面将以#110为例介绍一下实现方法：
 
 #### 110	Balanced Binary Tree	33.4%	Easy
@@ -210,24 +213,15 @@ tree2 = Array(1,
 然而什么样的数据结构需要这样的结构呢？Heap就是这样一种数据结构：它要求树是完全的，并且对每一颗子树，其根节点均小于等于[或大于等于]其子节点。即`Heap(parent(i)) <= Heap(i)`
 
 > 参考资料
-> * https://www.youtube.com/watch?v=W81Qzuz4qH0
-> * http://stackoverflow.com/questions/1098277/java-implementation-for-min-max-heap
 > * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
 > * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/code/Heap.java
+> * https://www.youtube.com/watch?v=W81Qzuz4qH0
 > * http://stackoverflow.com/questions/1098277/java-implementation-for-min-max-heap
 
+todo
 
 #### 23 Merge k Sorted Lists  22.7% Hard
-合并k个List，简单的做法是一个个处理，时间复杂度是O(k * n)
-
-  lists.foldLeft(List[Int]()) {(res, l) => merge(res, l) }
-
-但这样可能导致大量的重复操作。一次遍历可以通过建堆的方式完成，堆的描述见[Tree](tree.md)
-
-
-根据我们之前的定义
-当然如果按照完全二叉树，存到数组的话 Given binary tree {3,9,20,#,#,15,7}，
-使用下标的方式也可以获取，完全二叉树特性，
+合并k个List，通过对来合并的时间复杂度是`O(log(k) * n)`。
 todo
 
 
@@ -235,50 +229,156 @@ todo
 
 ### 修改树
 
-#### 114	Flatten Binary Tree to Linked List	30.4%	Medium
-给定一棵树，按照前序遍历转为List
+有一些题目要求直接修改树。但是由于TreeNode定义为一个`case class`，此时它是immutable的，无法直接修改。为了支持直接修改，需要作如下修改：
 
-def flatternTree(root: Option[TreeNode]): List[Int] = root match {
-  case None => Nil
+	class TreeNode(var value: Int, var left: Option[TreeNode] = None, var right: Option[TreeNode] = None)
+
+不过带来的问题是不能利用模式匹配等特性，另外也需要自己定义一个toString的表示方法
+
+#### 114	Flatten Binary Tree to Linked List	30.4%	Medium
+给定一棵树，按照前序遍历转为List，如果不修改的话，可以使用模式匹配来做
+
+	def flatternTree(root: Option[TreeNode]): List[Int] = root match {
+	  case None => Nil
+	  case Some(node) =>
+	    flatternTree(node.right) ::: node.value :: flatternTree(node.left)
+	}
+
+但是这里不满足in-place的要求，而且使用了队列的连接，时间上也没有很好的优化。所以改进的方法是：
+
+首先递归处理好左右子树，然后找到左子树的最右节点，把右子树挂在其右节点上，然后把左子树挂在自己的右节点上。
+
+```
+def flatternTree(root: Option[TreeNode]) : Option[TreeNode] = root match {
+  case None => None
   case Some(node) =>
-    flatternTree(node.right) ::: node.value :: flatternTree(node.left)
+    val left = flatternTree(node.left)
+    node.right = flatternTree(node.right)
+    if(left.isDefined) {
+      var temp = left.get
+      while(temp.right.isDefined) temp = temp.right.get
+      temp.right = node.right
+      node.right = left
+    }
+    root
 }
 
-但是这里不满足in-place的要求。由于TreeNode定义为一个case class，此时树是immutable的。要实现修改树需要改为class
+val tree1 = Some(new TreeNode(1,
+  Some(new TreeNode(2,
+    Some(new TreeNode(3)),
+    Some(new TreeNode(4)))),
+  Some(new TreeNode(5,
+    None,
+    Some(new TreeNode(6))
+    ))))
 
-具体方式就是找左子树最右节点，把右子树挂上，然后继续处理左子树 todo
+var result = flatternTree(tree1)
+var x = result
+while(x.isDefined) {
+  println(x.get.value)
+  x = x.get.right
+}
+```
 
+#### 116	Populating Next Right Pointers in Each Node	36.4%	Medium
+constant extra space. perfect binary tree
+> todo
+
+#### 117	Populating Next Right Pointers in Each Node II	32.6%	Hard
+constant extra space. not perfect binary tree
+> todo
 
 
 
 
 #### Binary Search Tree
 
-构建 todo
+二叉搜索树结构与二叉树没有区别，只是其中的节点要满足一个特性：对每一个节点，其值都大于其左子树的所有值，且小于等于其右子树的所有值。
+
+BST需要很方便的修改节点，因此前面介绍的修改树中的结构正好可以在这里利用：
+
+	class TreeNode(var value: Int, var left: Option[TreeNode] = None, var right: Option[TreeNode] = None)
+
+#### 108	Convert Sorted Array to Binary Search Tree	36.3%	Medium
+从排好序的数组构建BST。
+
+要想很好的利用BST特性，使构建的树层数尽量少，则需要从中间开始构建：
+
+```
+def generateBST(arr: Array[Int], start: Int, end: Int): Option[TreeNode] = {
+  if (start > end) None
+  else if (start == end) Some(new TreeNode(arr(start)))
+  else {
+    val mid = start + (end - start) / 2
+    Some(new TreeNode(arr(mid),
+      generateBST(arr, start, mid - 1),
+      generateBST(arr, mid + 1, end)))
+  }
+}
+
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+```
+
+#### 109	Convert Sorted List to Binary Search Tree	29.7%	Medium
+与#108类似，关键是怎样获取其中点，可以参考List的#141，使用一快一慢节点法
+
+#### 98	Validate Binary Search Tree	20.7%	Medium
+验证特性使用dfs即可，其中左子树返回max，右子树返回min，然后看value是否满足`left-max < value < right-min` 即可
+
+可以参考#110的实现，使其返回为`(min, max, isBST)`，但实现起来会发现很困难。因此换一种思维，将问题改为判定树中的所有节点的值是否在给定范围内即可：
+
+```
+def isBST(root: Option[TreeNode], min: Int, max: Int): Boolean = root match {
+  case None => true
+  case Some(node) =>
+    if (node.value < min || node.value > max) false
+    else isBST(node.left, min, node.value) && isBST(node.right, node.value, max)
+}
+
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+isBST(tree1, Int.MinValue, Int.MaxValue)
+```
+
+#### 99	Recover Binary Search Tree	25.8%	Hard
+有两个节点被错误的调换了，将这棵树恢复，要求直接修改值，不能修改结构
+
+被错误调换的节点可能使BST丧失其特性，我们只要找到这两个导致丧失特性的节点，交换其值即可：
+
+```
+def recoverBST(root: Option[TreeNode], min: Int, max: Int): (Option[TreeNode], Option[TreeNode]) = root match {
+  case None => (None, None)
+  case Some(node) =>
+    if (node.value < min) (None, Some(node))
+    else if (node.value > max) (Some(node), None)
+    else {
+      val (x, _) = recoverBST(node.left, min, node.value)
+      val (_, y) = recoverBST(node.right, node.value, max)
+      (x, y) match {
+        case (None, _) | (_, None) => (x, y)
+        case (a, b) =>
+          val x = a.get.value
+          a.get.value = b.get.value
+          b.get.value = x
+          (None, None)
+      }
+    }
+}
 
 
-* 98	Validate Binary Search Tree	20.7%	Medium
-验证特性使用dfs即可，其中左子树返回max，右子树返回min，然后看value是否满足 l-max < value < r-max 即可
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+tree1.get.left.get.value
+tree1.get.left.get.value = 6
+tree1.get.right.get.value
+tree1.get.right.get.value = 2
+
+isBST(tree1, Int.MinValue, Int.MaxValue)
+recoverBST(tree1, Int.MinValue, Int.MaxValue)
+isBST(tree1, Int.MinValue, Int.MaxValue)
+```
+
+但O(1)空间复杂度无法满足，其他方法请自行搜索
 
 
-* 109	Convert Sorted List to Binary Search Tree	29.7%	Medium
-* 108	Convert Sorted Array to Binary Search Tree	36.3%	Medium
-要想利用BST特性，需要从中间开始构建
-
-
-* 99	Recover Binary Search Tree	25.8%	Hard
-> constant space solution, without changing its structure
-> todo
-
-
-
-
-* 116	Populating Next Right Pointers in Each Node	36.4%	Medium
-constant extra space. perfect binary tree
-> todo
-* 117	Populating Next Right Pointers in Each Node II	32.6%	Hard
-constant extra space. not perfect binary tree
-> todo
 
 
 
@@ -294,7 +394,6 @@ constant extra space. not perfect binary tree
 236	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
 235	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
 230	Kth Smallest Element in a BST	35.9%	Medium
-226	Invert Binary Tree	43.7%	Easy
 222	Count Complete Tree Nodes	24.1%	Medium
 199	Binary Tree Right Side View	32.9%	Medium
 173	Binary Search Tree Iterator	33.3%	Medium
@@ -303,20 +402,6 @@ constant extra space. not perfect binary tree
 
 
 124	Binary Tree Maximum Path Sum	22.8%	Hard
-
-
-
-
-96	Unique Binary Search Trees	36.8%	Medium
-95	Unique Binary Search Trees II	28.8%	Medium
-
-
-
-
-
-
-
-
 
 
 

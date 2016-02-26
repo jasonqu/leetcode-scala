@@ -4,7 +4,7 @@
 
 List是scala最重要的数据结构之一，学好它是掌握scala的重要基础。这里将复用scala中的List来做题。
 
-由于scala中的List是immutable的，没有环，所以下面的问题将忽略：
+由于scala中的List是immutable的，没有环，所以下面的问题将忽略：todo 实现一下
 
 * 142	Linked List Cycle II	31.5%	Medium
 * 141	Linked List Cycle	36.8%	Medium

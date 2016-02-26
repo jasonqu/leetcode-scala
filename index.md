@@ -106,14 +106,14 @@
 * [x] 229	[array](array.md)	Majority Element II	25.1%	Medium
 * [x] 228	[array](array.md)	Summary Ranges	23.0%	Easy
 * [ ] 227	Basic Calculator II	23.6%	Medium
-* [ ] 226	Invert Binary Tree	43.7%	Easy
+* [-] 226	[Tree](tree.md)	Invert Binary Tree	43.7%	Easy
 * [ ] 225	Implement Stack using Queues	30.4%	Easy
 * [ ] 224	Basic Calculator	20.9%	Medium
 * [ ] 223	Rectangle Area	29.1%	Easy
 * [ ] 222	Count Complete Tree Nodes	24.1%	Medium
 * [ ] 221	Maximal Square	22.8%	Medium
 * [ ] 220	Contains Duplicate III	18.1%	Medium
-* [todo] 219	[array](array.md)	Contains Duplicate II	29.0%	Easy
+* [x] 219	[array](array.md)	Contains Duplicate II	29.0%	Easy
 * [ ] 218	The Skyline Problem	21.1%	Hard
 * [x] 217	[array](array.md)	Contains Duplicate	40.2%	Easy
 * [ ] 216	Combination Sum III	34.2%	Medium
@@ -202,13 +202,13 @@
 * [ ] 117	Populating Next Right Pointers in Each Node II	32.6%	Hard
 * [ ] 116	Populating Next Right Pointers in Each Node	36.4%	Medium
 * [ ] 115	Distinct Subsequences	28.2%	Hard
-* [ ] 114	Flatten Binary Tree to Linked List	30.4%	Medium
+* [x] 114	[Tree](tree.md)	Flatten Binary Tree to Linked List	30.4%	Medium
 * [-] 113	[Tree](tree.md)	Path Sum II	27.7%	Medium
 * [-] 112	[Tree](tree.md)	Path Sum	30.8%	Easy
 * [x] 111	[Tree](tree.md)	Minimum Depth of Binary Tree	30.2%	Easy
 * [x] 110	[Tree](tree.md)	Balanced Binary Tree	33.4%	Easy
-* [ ] 109	Convert Sorted List to Binary Search Tree	29.8%	Medium
-* [ ] 108	Convert Sorted Array to Binary Search Tree	36.3%	Medium
+* [-] 109	[Tree](tree.md)	Convert Sorted List to Binary Search Tree	29.8%	Medium
+* [x] 108	[Tree](tree.md)	Convert Sorted Array to Binary Search Tree	36.3%	Medium
 * [-] 107	[Tree](tree.md)	Binary Tree Level Order Traversal II	33.1%	Easy
 * [-] 106	[Tree](tree.md)	Construct Binary Tree from Inorder and Postorder Traversal	28.4%	Medium
 * [-] 105	[Tree](tree.md)	Construct Binary Tree from Preorder and Inorder Traversal	27.9%	Medium
@@ -217,8 +217,8 @@
 * [x] 102	[Tree](tree.md)	Binary Tree Level Order Traversal	31.7%	Easy
 * [x] 101	[Tree](tree.md)	Symmetric Tree	33.3%	Easy
 * [-] 100	[Tree](tree.md)	Same Tree	42.7%	Easy
-* [ ] 99	Recover Binary Search Tree	25.8%	Hard
-* [ ] 98	Validate Binary Search Tree	20.7%	Medium
+* [x] 99	[Tree](tree.md)	Recover Binary Search Tree	25.8%	Hard
+* [x] 98	[Tree](tree.md)	Validate Binary Search Tree	20.7%	Medium
 * [ ] 97	Interleaving String	22.0%	Hard
 * [ ] 96	Unique Binary Search Trees	36.8%	Medium
 * [ ] 95	Unique Binary Search Trees II	28.8%	Medium

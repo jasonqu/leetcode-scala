@@ -1,24 +1,20 @@
-动态规划
+## Array
 
-### 概念
+### 简介
 
-动态规划类似于数学归纳法，创建递推公式，然后从初始状态寻找规律
+动态规划类似于数学归纳法，创建递推公式，然后从初始状态寻找规律。
 
-什么是动态规划？动态规划的意义是什么？
-https://www.zhihu.com/question/23995189
+可以参考这些文章来了解动态规划：
+* [什么是动态规划？动态规划的意义是什么？](https://www.zhihu.com/question/23995189)
+* [动态规划：从新手到专家](http://www.hawstein.com/posts/dp-novice-to-advanced.html)，[原文](https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/)
+* [背包问题九讲](http://love-oriented.com/pack/)
 
-动态规划：从新手到专家
-http://www.hawstein.com/posts/dp-novice-to-advanced.html
-https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/
+todo
 
-背包问题九讲
-http://love-oriented.com/pack/
-
-
-
-* 53	Maximum Subarray	36.0%	Medium
+#### 53	Maximum Subarray	36.0%	Medium
 For example, given the array [-2,1,-3,4,-1,2,1,-5,4], the contiguous subarray [4,-1,2,1] has the
 largest sum = 6.
+
 local 与 global 找最优
 dp[i + 1] = max(dp[i], dp[i] + a[i + 1])
 
