@@ -138,11 +138,11 @@ else
     else xs2.head :: merge(xs1, xs2.tail)
 
 #### 23	Merge k Sorted Lists	22.7%	Hard
-合并k个List，简单的做法
+合并k个List，简单的做法是一个个处理，时间复杂度是O(k * n)
 
   lists.foldLeft(List[Int]()) {(res, l) => merge(res, l) }
 
-但这样可能导致大量的重复操作。一次性的方式可以通过建堆完成：todo
+但这样可能导致大量的重复操作。一次遍历可以通过建堆的方式完成，堆的描述见[Tree](tree.md)
 
 #### 2  Add Two Numbers	22.2%	Medium
 单个位数相加，要考虑进位

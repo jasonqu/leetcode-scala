@@ -2,13 +2,12 @@
 
 ### 简介
 
-Array是能够随机访问的数据结构，优点是访问速度快，缺点是如果大小有变化，处理很困难，一般可以选择使用ArrayBuffer
+Array是能够随机访问的数据结构，优点是访问速度快，缺点是如果Array的大小有变化，扩容缩容很困难。
 
-ArrayBuffer不是immutable的，因此可以改用Vector
+如果有很多扩缩容操作可以选择使用ArrayBuffer，不过ArrayBuffer不是immutable的，因此如果要求是immutable的则可以改用Vector。本节中将统一使用Array来解题。
 
 ### 基本操作
-todo scala提供了通用操作
-有些题目划在了array名下，但实际上应该在动态数据结构中更合适，可以参考List的处理
+scala针对集合提供了通用操作，因此有些题目划在了array名下，但实际上应该在动态数据结构中更合适，这些题目可以参考[List](list.md)的处理方式
 
 #### 66	Plus One	32.6%	Easy
 见List#2
@@ -29,11 +28,24 @@ todo scala提供了通用操作
 #### 217	Contains Duplicate	40.2%	Easy
 是否有重复
 
-  arr.distinct == arr
+  arr.distinct != arr
 
 #### 219	Contains Duplicate II	29.1%	Easy
-是否有重复，且相同元素下标之差必须小于k
-用Map保存下标 todo
+是否有重复，且相同元素下标之差必须小于k。用Map保存下标即可
+
+  def repeatInK(arr:Array[Int], k:Int): Boolean = {
+    var map = Map[Int, Int]()
+    var satisfy = false
+    for(i <- arr.indices) {
+      val v = arr(i)
+      map.get(v) match {
+        case Some(x) if !satisfy => satisfy = (i - x) < k
+        case _ =>
+      }
+      map = map + (v -> i)
+    }
+    satisfy
+  }
 
 #### 287	Find the Duplicate Number	37.7%	Hard
 todo
@@ -50,7 +62,7 @@ todo
 
   arr.groupBy(t => t).filter(_._2.size >= arr.size / 3)
 
-其他更优化的算法todo参见[这里](http://www.cnblogs.com/EdwardLiu/p/4179345.html)
+其他更优化的算法，如Moore投票法参见[这里](http://www.cnblogs.com/EdwardLiu/p/4179345.html)
 
 #### 283 Move Zeroes 43.4% Easy
 0 移到最后

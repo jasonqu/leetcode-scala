@@ -66,7 +66,7 @@ traverse(Some(tree1), {t:TreeNode => println(t.value)})
 
 树的结构决定了可以自然地使用递归分治方式来解决问题：要求解一个问题，如果能够分别解出左右子树的问题，然后在本节点加以综合即可。这时只需根据题意简单的修改一下遍历的算法即可。
 
-> 在编写树的递归算法时，不用可以寻找尾递归优化，因为编写的为递归往往也需要使用类似栈的结构保存树的路径，因此不如使用程序栈使代码会更简洁一些
+> 在编写树的递归算法时，不用刻意寻找尾递归优化，因为编写的尾递归往往也需要使用类似栈的结构保存树的路径，因此不如使用程序栈来使代码更简洁一些
 
 #### 104	Maximum Depth of Binary Tree	47.1%	Easy
 最大深度
@@ -182,7 +182,7 @@ levelTraverse(tree2)
 只要增加一个奇偶判断是否需要reverse即可，略
 
 
-### 树的数组形式、完全二叉树和堆
+### 树的数组形式和堆
 通过树的BFS广度优先遍历来看，可以看出一颗树可以被序列化为一个线性结构——数组。数组的好处是能够随机访问，从而提高读取和修改内容的效率。
 
 这里我们将树的数组形式定义为`Array[Option[Type of TreeNode.value]]`，前面介绍的例子`tree1`将变为：
@@ -205,22 +205,24 @@ tree2 = Array(1,
 * 左子节点索引：`left(i) = 2 * i + 1`
 * 右子节点索引：`right(i) = 2 * i + 2`
 
-根据`tree2`可以看到，如果是稀疏的树，其空间比链表形式存储浪费的更大，因此适合于完全二叉树来存储，就像`tree1`那样，完全没有浪费。
+根据`tree2`可以看到，如果是稀疏的树，其空间比链表形式存储浪费的更大。因此数组存储法适合于完全二叉树（Complete Binary Tree）来存储，就像`tree1`那样，这样数组的空间就完全没有浪费。
 
-3. Heap: creation, insertion.
-(1) Concept: nearly complete binary tree, implemented using array
-Parent-child relation: for 0-based array (A[0:n-1])
-parent(i) = (i-1)/2
-left(i) = 2*i+1
-right(i) = 2*i+2
-(2) Properties:
-Max heap: A[parent(i)] >= A[i] - heap sort
-Min heap: A[parent(i)] <= A[i] -  priority queue
-(3) Heapify: find the largest among y = {A[i], A[left(i)], A[ right(i)]}.
-If y = A[i], done; else, swap A[i] with y, and heapify y
-(4) Build max heap: for each i from heap.size/2  to 0, heapify(i).
+然而什么样的数据结构需要这样的结构呢？Heap就是这样一种数据结构：它要求树是完全的，并且对每一颗子树，其根节点均小于等于[或大于等于]其子节点。即`Heap(parent(i)) <= Heap(i)`
+
+> 参考资料
+> * https://www.youtube.com/watch?v=W81Qzuz4qH0
+> * http://stackoverflow.com/questions/1098277/java-implementation-for-min-max-heap
+> * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
+> * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/code/Heap.java
+> * http://stackoverflow.com/questions/1098277/java-implementation-for-min-max-heap
 
 
+#### 23 Merge k Sorted Lists  22.7% Hard
+合并k个List，简单的做法是一个个处理，时间复杂度是O(k * n)
+
+  lists.foldLeft(List[Int]()) {(res, l) => merge(res, l) }
+
+但这样可能导致大量的重复操作。一次遍历可以通过建堆的方式完成，堆的描述见[Tree](tree.md)
 
 
 根据我们之前的定义
