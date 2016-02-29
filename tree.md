@@ -217,6 +217,7 @@ tree2 = Array(1,
 > * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/code/Heap.java
 > * https://www.youtube.com/watch?v=W81Qzuz4qH0
 > * http://stackoverflow.com/questions/1098277/java-implementation-for-min-max-heap
+> * http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/
 
 todo
 
@@ -383,20 +384,93 @@ isBST(tree1, Int.MinValue, Int.MaxValue)
 
 
 
-333	Largest BST Subtree 	26.9%	Medium
+#### 333	Largest BST Subtree 	26.9%	Medium
+找出具有二叉树特性的包含节点数最多的子树
+
+对#98稍加改造，返回该子树中最大的BST子树的节点数，和以该节点为根的数是否是BST
+
+```
+def largestSubBST(root: Option[TreeNode], min: Int, max: Int): (Int, Boolean) = root match {
+  case None => (0, true)
+  case Some(node) =>
+    val (l, bl) = largestSubBST(node.left, min, node.value)
+    val (r, br) = largestSubBST(node.right, node.value, max)
+    if(bl && br && node.value >= min && node.value <= max)
+      (l + r + 1, true)
+    else
+      (max(l, r), false)
+}
+
+// todo test
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+isBST(tree1, Int.MinValue, Int.MaxValue)
+```
+
+
+
+
 298	Binary Tree Longest Consecutive Sequence 	35.2%	Medium
+找到最长的递增路径，DFS与保存状态相结合
+递归时，传入父节点的值和以父节点为叶子的最长递增路径
+返回的是以该节点为根的最大递增路径长度
+todo or 略
+
+
 297	Serialize and Deserialize Binary Tree	26.5%	Medium
+开放性问题，自己设计一种序列化机制，并实现其算法
+如数组表示
+todo
+
+
 285	Inorder Successor in BST 	35.0%	Medium
-272	Closest Binary Search Tree Value II 	31.7%	Hard
+右子树的最左节点，如果没有右子树，则为其parent，可以通过二叉搜索法搜索
+todo or 略
+
+
 270	Closest Binary Search Tree Value 	33.2%	Easy
+给定一个浮点值，找出最接近它的节点的值
+要么比他小，要么比他大，需要找到
+
+可以参考#285？
+
+272 Closest Binary Search Tree Value II   31.7% Hard
+http://www.cnblogs.com/jcliBlogger/p/4771342.html
+todo
+似乎不难，分而治之
+
 255	Verify Preorder Sequence in Binary Search Tree 	36.1%	Medium
+检验一个数组中的数，是不是和一个bst的前序遍历一致
+todo?
+
 250	Count Univalue Subtrees 	35.4%	Medium
+http://dananqi.blog.163.com/blog/static/23066615020157693621888/
+具有相同节点值的子树的总数，遍历一下
+todo or 略
+
 236	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
+需要便利所有的节点
+？？？
+
 235	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
+那个最近共同祖先一定满足 >= 小节点的值，<= 大节点的值
+todo or 略
+
 230	Kth Smallest Element in a BST	35.9%	Medium
+中序遍历 加一个数字 递归处理
+todo or 略
+
 222	Count Complete Tree Nodes	24.1%	Medium
+complete树为什么不用array存储。。。
+
+
 199	Binary Tree Right Side View	32.9%	Medium
+
+
+
 173	Binary Search Tree Iterator	33.3%	Medium
+
+
+
 156	Binary Tree Upside Down 	37.2%	Medium
 
 
