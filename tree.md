@@ -133,6 +133,12 @@ value之和 等于 给定值 的树的路径
 #### 226	Invert Binary Tree	43.7%	Easy
 翻转树
 
+#### 250	Count Univalue Subtrees 	35.4%	Medium
+具有相同节点值的子树的总数
+
+#### 236	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
+给定返回值表示是否是某个节点的parent即可
+
 对有一些问题，只要查到一个特例就可以返回结果时，可以不需要遍历后面的路径，类似的问题如#101、#100、#112。这时可以通过使用scala的lazy关键字延迟求值，并使用布尔变量来做短路求值（short circuit）。下面将以#110为例介绍一下实现方法：
 
 #### 110	Balanced Binary Tree	33.4%	Easy
@@ -224,8 +230,6 @@ todo
 #### 23 Merge k Sorted Lists  22.7% Hard
 合并k个List，通过对来合并的时间复杂度是`O(log(k) * n)`。
 todo
-
-
 
 
 ### 修改树
@@ -340,6 +344,186 @@ val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
 isBST(tree1, Int.MinValue, Int.MaxValue)
 ```
 
+不过这种方式仍然不太直观，还是使用返回为`(min, max, isBST)`的方式实现一下：
+```
+def isBST(root: Option[TreeNode], parentValue: Int): (Int, Int, Boolean) = root match {
+  case None => (parentValue, parentValue, true)
+  case Some(node) =>
+    val v = node.value
+    lazy val (lmin, lmax, lIsBst) = isBST(node.left, v)
+    lazy val (rmin, rmax, rIsBst) = isBST(node.right, v)
+    if(!lIsBst || !rIsBst || lmax > v || rmin < v) (lmin, rmax, false)
+    else (lmin, rmax, true)
+}
+
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+isBST(tree1, tree1.get.value)
+```
+
+#### 255	Verify Preorder Sequence in Binary Search Tree 	36.1%	Medium
+检验一个数组中的数，是不是和一个bst的前序遍历一致
+
+只需要验证一个节点，增加一下index即可：
+
+```
+def verifyBST(root: Option[TreeNode], arr: Array[Int], index: Int): (Int, Boolean) = root match {
+  case None => (index, true)
+  case Some(node) =>
+    val (i, v) = verifyBST(node.left, arr, index)
+    if(!v) (i, false)
+    else {
+      if(arr(i) != node.value) (i, false)
+      else verifyBST(node.right, arr, i + 1)
+    }
+}
+```
+
+#### 230	Kth Smallest Element in a BST	35.9%	Medium
+BST的第K个元素，即中序遍历 加一个数字 递归处理，类似于#255，略
+
+
+#### 235	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
+求两个节点的最小的共同祖先
+
+该祖先节点一定满足`v >= min(node1.value, node2.value) && v <= max(node1.value, node2.value)`，然后采取类似#98的遍历方法即可
+
+#### 333	Largest BST Subtree 	26.9%	Medium
+找出具有二叉树特性的包含节点数最多的子树
+
+希望对#98改造，从而返回该子树中最大的BST子树的节点数，和以该节点为根的数是否是BST，(max_nodes, isBST)，即可求得结果。
+但是由于子树不一定是BST，所以不能使用方法一，可以尝试改造方法二，使返回值为：(min_value, max_value, max_nodes, isBST)
+
+```
+def largestSubBST(root: Option[TreeNode], parentValue: Int): (Int, Int, Int, Boolean) = root match {
+  case None => (parentValue, parentValue, 0, true)
+  case Some(node) =>
+    val v = node.value
+    lazy val (lmin, lmax, l, bl) = largestSubBST(node.left, v)
+    lazy val (rmin, rmax, r, br) = largestSubBST(node.right, v)
+    if(!bl || !br || lmax > v || rmin < v) (lmin, rmax, max(l, r), false)
+    else (lmin, rmax, l + r + 1, true)
+}
+
+// todo test
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+isBST(tree1, tree1.get.value)
+```
+
+#### 285	Inorder Successor in BST 	35.0%	Medium
+BST的后继结点
+
+右子树的最左节点；如果没有右子树，当该节点为parent的左子节点，则为其parent，否则为grandparent。可以通过二叉搜索法搜索
+
+```
+def getParent(root: Option[TreeNode], target: Option[TreeNode]): Option[TreeNode] = target match {
+  case None => None
+  case Some(node) => root match {
+    case None => None
+    case Some(roo) =>
+      if(roo.left == target || roo.right == target) root
+      else {
+        val v = node.value
+        val r = roo.value
+        getParent(if(v < r) roo.left else roo.right, target)
+      }
+  }
+}
+
+def successor(root: Option[TreeNode], target: Option[TreeNode]): Option[TreeNode] = target match {
+  case None => None
+  case Some(node) =>
+    if(node.right.isDefined) {
+      var n = node.right
+      while(n.isDefined && n.get.left.isDefined)
+        n = n.get.left
+      n
+    } else {
+      val p = getParent(root, target)
+      p match {
+        case None => None
+        case Some(parent) =>
+          if(parent.left == target) p
+          else getParent(root, p)
+      }
+    }
+}
+
+val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
+val n = tree1.get.left.get.right
+n.get.value
+successor(tree1, n).get.value
+```
+
+上面的代码很大，一个优化的方法见[这里](http://www.cnblogs.com/jcliBlogger/p/4829200.html)
+
+```
+def getLeftMost(root: Option[TreeNode]) = {
+  var x = root
+  while(x.isDefined && x.get.left.isDefined) x = x.get.left
+  x
+}
+
+def successor(root: Option[TreeNode], target: Option[TreeNode]): Option[TreeNode] = target match {
+  case None => None
+  case Some(node) =>
+    if(node.right.isDefined) getLeftMost(node.right)
+    else {
+      var p = root
+      var succ = None : Option[TreeNode]
+      val v = target.get.value
+      while(p.isDefined) {
+        if(p.get.value > v) {
+          succ = p
+          p = p.get.left
+        } else if(p.get.value < v) {
+          p = p.get.right
+        } else {
+          p = None
+        }
+      }
+      succ
+    }
+}
+```
+
+可以看到，由于val的限制，这里的代码比原例子中的要长
+
+#### 173	Binary Search Tree Iterator	33.3%	Medium
+实现BST的Iterator，达到 next()与 hasNext()平均O(1)时间复杂度和O(h)空间复杂度，其中h表示树高
+
+todo
+
+
+
+
+#### 270	Closest Binary Search Tree Value 	33.2%	Easy
+给定一个浮点值，找出最接近它的节点的值
+
+遍历一下树枝即可
+
+```
+def closest(root: Option[TreeNode], target: Double): Option[Int] = root match {
+  case None => None
+  case Some(node) =>
+    val v = node.value
+    val res = if(v > target) closest(node.left, target) else closest(node.right, target)
+    res match {
+      case None => Some(v)
+      case Some(x) => if(abs(v - target) > abs(x - target)) res else Some(v)
+    }
+}
+```
+
+更简短的版本可以参考：[leetcode discuss](https://leetcode.com/discuss/54438/4-7-lines-recursive-iterative-ruby-c-java-python)
+
+#### 272 Closest Binary Search Tree Value II   31.7% Hard
+给定一个浮点值，找出最接近它的节点的值的集合，即有可能存在多个值
+
+http://www.cnblogs.com/jcliBlogger/p/4771342.html
+
+todo
+
+
 #### 99	Recover Binary Search Tree	25.8%	Hard
 有两个节点被错误的调换了，将这棵树恢复，要求直接修改值，不能修改结构
 
@@ -384,100 +568,102 @@ isBST(tree1, Int.MinValue, Int.MaxValue)
 
 
 
-#### 333	Largest BST Subtree 	26.9%	Medium
-找出具有二叉树特性的包含节点数最多的子树
-
-对#98稍加改造，返回该子树中最大的BST子树的节点数，和以该节点为根的数是否是BST
-
-```
-def largestSubBST(root: Option[TreeNode], min: Int, max: Int): (Int, Boolean) = root match {
-  case None => (0, true)
-  case Some(node) =>
-    val (l, bl) = largestSubBST(node.left, min, node.value)
-    val (r, br) = largestSubBST(node.right, node.value, max)
-    if(bl && br && node.value >= min && node.value <= max)
-      (l + r + 1, true)
-    else
-      (max(l, r), false)
-}
-
-// todo test
-val tree1 = generateBST(Array(1, 2, 3, 4, 5, 6, 7), 0, 6)
-isBST(tree1, Int.MinValue, Int.MaxValue)
-```
 
 
 
 
-298	Binary Tree Longest Consecutive Sequence 	35.2%	Medium
+### 未归类问题
+
+#### 298	Binary Tree Longest Consecutive Sequence 	35.2%	Medium
+For example,
+
+   1
+    \
+     3
+    / \
+   2   4
+        \
+         5
+Longest consecutive sequence path is 3-4-5, so return 3.
+
+   2
+    \
+     3
+    / 
+   2    
+  / 
+ 1
+Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
+
+
+
 找到最长的递增路径，DFS与保存状态相结合
 递归时，传入父节点的值和以父节点为叶子的最长递增路径
 返回的是以该节点为根的最大递增路径长度
 todo or 略
 
+将Longest Consecutive Sequence从array移植到树结构上
 
-297	Serialize and Deserialize Binary Tree	26.5%	Medium
+#### 297	Serialize and Deserialize Binary Tree	26.5%	Medium
 开放性问题，自己设计一种序列化机制，并实现其算法
 如数组表示
 todo
 
 
-285	Inorder Successor in BST 	35.0%	Medium
-右子树的最左节点，如果没有右子树，则为其parent，可以通过二叉搜索法搜索
-todo or 略
 
 
-270	Closest Binary Search Tree Value 	33.2%	Easy
-给定一个浮点值，找出最接近它的节点的值
-要么比他小，要么比他大，需要找到
 
-可以参考#285？
 
-272 Closest Binary Search Tree Value II   31.7% Hard
-http://www.cnblogs.com/jcliBlogger/p/4771342.html
+#### 199	Binary Tree Right Side View	32.9%	Medium
+For example:
+Given the following binary tree,
+
+   1            <---
+ /   \
+2     3         <---
+ \     \
+  5     4       <---
+ 
+
+You should return [1, 3, 4].
+
+
+后序遍历检查深度数字
+
 todo
-似乎不难，分而治之
-
-255	Verify Preorder Sequence in Binary Search Tree 	36.1%	Medium
-检验一个数组中的数，是不是和一个bst的前序遍历一致
-todo?
-
-250	Count Univalue Subtrees 	35.4%	Medium
-http://dananqi.blog.163.com/blog/static/23066615020157693621888/
-具有相同节点值的子树的总数，遍历一下
-todo or 略
-
-236	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
-需要便利所有的节点
-？？？
-
-235	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
-那个最近共同祖先一定满足 >= 小节点的值，<= 大节点的值
-todo or 略
-
-230	Kth Smallest Element in a BST	35.9%	Medium
-中序遍历 加一个数字 递归处理
-todo or 略
-
-222	Count Complete Tree Nodes	24.1%	Medium
-complete树为什么不用array存储。。。
-
-
-199	Binary Tree Right Side View	32.9%	Medium
 
 
 
-173	Binary Search Tree Iterator	33.3%	Medium
+
+#### 156	Binary Tree Upside Down 	37.2%	Medium
+Given a binary tree where all the right nodes are either leaf nodes with a sibling (a left node that shares the same parent node) or empty, flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
+For example:
+Given a binary tree {1,2,3,4,5},
+    1
+   / \
+  2   3
+ / \
+4   5
+return the root of the binary tree [4,5,2,#,#,3,1].
+   4
+  / \
+ 5   2
+    / \
+   3   1  
+   
+   没看出有什么意义 todo
 
 
+#### 124	Binary Tree Maximum Path Sum	22.8%	Hard
 
-156	Binary Tree Upside Down 	37.2%	Medium
+Given a binary tree, find the maximum path sum.
+The path may start and end at any node in the tree.
+For example:
+Given the below binary tree,
+       1
+      / \
+     2   3
 
-
-
-124	Binary Tree Maximum Path Sum	22.8%	Hard
-
-
-
+todo
 
 

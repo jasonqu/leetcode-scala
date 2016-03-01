@@ -1,6 +1,6 @@
 * ID Category Title Acceptance Difficulty
 * [ ] 334	Increasing Triplet Subsequence	38.9%	Medium
-* [ ] 333	Largest BST Subtree 	26.7%	Medium
+* [x] 333	[Tree](tree.md)	Largest BST Subtree 	26.7%	Medium
 * [ ] 332	Reconstruct Itinerary	22.8%	Medium
 * [ ] 331	Verify Preorder Serialization of a Binary Tree	32.0%	Medium
 * [ ] 330	Patching Array	27.4%	Medium
@@ -48,7 +48,7 @@
 * [ ] 288	Unique Word Abbreviation 	15.6%	Easy
 * [todo] 287	[array](array.md)	Find the Duplicate Number	37.7%	Hard
 * [ ] 286	Walls and Gates 	36.0%	Medium
-* [ ] 285	Inorder Successor in BST 	35.0%	Medium
+* [x] 285	Inorder Successor in BST 	35.0%	Medium
 * [ ] 284	Peeking Iterator	32.8%	Medium
 * [x] 283	[array](array.md)	Move Zeroes	43.4%	Easy
 * [ ] 282	Expression Add Operators	23.3%	Hard
@@ -63,7 +63,7 @@
 * [ ] 273	Integer to English Words	18.0%	Medium
 * [ ] 272	Closest Binary Search Tree Value II 	31.6%	Hard
 * [ ] 271	Encode and Decode Strings 	26.9%	Medium
-* [ ] 270	Closest Binary Search Tree Value 	33.1%	Easy
+* [x] 270	Closest Binary Search Tree Value 	33.1%	Easy
 * [ ] 269	Alien Dictionary 	21.8%	Hard
 * [ ] 268	Missing Number	39.0%	Medium
 * [ ] 267	Palindrome Permutation II 	26.7%	Medium
@@ -77,12 +77,12 @@
 * [ ] 258	Add Digits	48.1%	Easy
 * [-] 257	[Tree](tree.md)	Binary Tree Paths	27.0%	Easy
 * [ ] 256	Paint House 	41.7%	Medium
-* [ ] 255	Verify Preorder Sequence in Binary Search Tree 	36.0%	Medium
+* [x] 255	[Tree](tree.md)	Verify Preorder Sequence in Binary Search Tree 	36.0%	Medium
 * [ ] 254	Factor Combinations 	33.7%	Medium
 * [ ] 253	Meeting Rooms II 	33.4%	Medium
 * [ ] 252	Meeting Rooms 	40.9%	Easy
 * [ ] 251	Flatten 2D Vector 	32.5%	Medium
-* [ ] 250	Count Univalue Subtrees 	35.4%	Medium
+* [-] 250	[Tree](tree.md)	Count Univalue Subtrees 	35.4%	Medium
 * [ ] 249	Group Shifted Strings 	30.8%	Easy
 * [ ] 248	Strobogrammatic Number III 	25.3%	Hard
 * [ ] 247	Strobogrammatic Number II 	33.0%	Medium
@@ -96,13 +96,13 @@
 * [ ] 239	Sliding Window Maximum	26.1%	Hard
 * [ ] 238	Product of Array Except Self	41.2%	Medium
 * [x] 237	[list](list.md)	Delete Node in a Linked List	43.8%	Easy
-* [ ] 236	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
-* [ ] 235	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
+* [-] 236	[Tree](tree.md)	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
+* [-] 235	[Tree](tree.md)	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
 * [x] 234	[list](list.md)	Palindrome Linked List	26.8%	Easy
 * [ ] 233	Number of Digit One	23.7%	Medium
 * [ ] 232	Implement Queue using Stacks	33.9%	Easy
 * [ ] 231	Power of Two	35.0%	Easy
-* [ ] 230	Kth Smallest Element in a BST	35.9%	Medium
+* [-] 230	[Tree](tree.md)	Kth Smallest Element in a BST	35.9%	Medium
 * [x] 229	[array](array.md)	Majority Element II	25.1%	Medium
 * [x] 228	[array](array.md)	Summary Ranges	23.0%	Easy
 * [ ] 227	Basic Calculator II	23.6%	Medium
