@@ -1,5 +1,7 @@
 ## Math
 
+leetcode中有一些数学类算法题，它们技巧性很高，难点再找到规律，这里重点介绍的是规律，实现没有放在重点
+
 ### 基本操作
 
 #### 8	String to Integer (atoi)	13.4%	Easy
@@ -19,8 +21,11 @@
 
 
 #### 67	Add Binary	26.7%	Easy
-两个binary string相加，"11" + "1" = "100"
-类似与#2 add two numbers
+两个代表binary的 string相加，如："11" + "1" = "100"
+
+	Integer.toBinaryString(Integer.parseInt(a, 2) + Integer.parseInt(b, 2))
+
+自己实现的方式类似#2 add two numbers，这里不再赘述
 
 
 #### 13	Roman to Integer	38.2%	Easy
@@ -34,7 +39,7 @@
 略
 
 #### 273	Integer to English Words	18.1%	Medium
-数字转英文，关键是找出规律
+数字转英文
 
 略
 
@@ -43,24 +48,30 @@
 
 埃拉托斯特尼筛法，创建一个大小为n的数组，从2到`sqrt(n)`一遍遍地筛，最后统计结果。
 
-略
+	val n = 101
+	var r = 1 to n toList
+	val x = sqrt(n).toInt
+	for(i <- 2 to x) r = r.filterNot(_ % i == 0)
+	r
 
 
 #### 268	Missing Number	39.2%	Medium
 `[0, n]` 少一个数，可以只用`O(n)`时间，`O(1)`空间实现吗？
 
-加、异或，略
+加、异或，异或的版本
+
+	var res = 0
+	for(i <- arr.indices) res = res ^ i ^ arr(i)
+	res ^ n
 
 
 #### 69	Sqrt(x)	24.9%	Medium
 返回值为Int类型，可以使用二分查找的方法，略
 
-50	Pow(x, n)	27.9%	Medium
-n可正可负，返回值为Double类型
+#### 50	Pow(x, n)	27.9%	Medium
+n可正可负，返回值为Double类型，可以[递归使用二分法](http://fisherlei.blogspot.com/2012/12/leetcode-powx-n.html)
 
-todo
-
-
+略
 
 ### 代数
 #### 172	Factorial Trailing Zeroes	31.9%	Easy
@@ -70,12 +81,16 @@ todo
 	              = floor(n/5) + floor(n/25) + floor(n/125) + ....
 
 #### 233	Number of Digit One	23.8%	Medium
-给出小于等于n的出现的1的数量：
-Given n = 13,
-Return 6, because digit 1 occurred in the following numbers: 1, 10, 11, 12, 13.
+给出小于等于n的出现的1的数量,例如n = 13时返回6，因为1出现在如下数字中： 1, 10, 11, 12, 13
 
-todo
+参考[leetcode discuss](https://leetcode.com/discuss/44281/8-lines-o-log-n-c-java-python)
 
+	public int countDigitOne(int n) {
+	    int ones = 0;
+	    for (long m = 1; m <= n; m *= 10)
+	        ones += (n/m + 8) / 10 * m + (n/m % 10 == 1 ? n%m + 1 : 0);
+	    return ones;
+	}
 
 #### 231	Power of Two	35.3%	Easy
 如果一个整数是2的幂，那么它的二进制形式最高位为1，其余各位为0
@@ -85,56 +100,76 @@ todo
 除了迭代求余之外，似乎没有更好的方法。
 
 #### 202	Happy Number	35.8%	Easy
-Example: 19 is a happy number
-1^2 + 9^2 = 82
-8^2 + 2^2 = 68
-6^2 + 8^2 = 100
-1^2 + 0^2 + 0^2 = 1
+例子: 19 is a happy number
 
-todo
+	1^2 + 9^2 = 82
+	8^2 + 2^2 = 68
+	6^2 + 8^2 = 100
+	1^2 + 0^2 + 0^2 = 1
+
+可以使用Map保存历史，循环操作即可，略
+
+#### 319	Bulb Switcher	39.5%	Medium
+有n个灯，初始都灭，第一遍都开，然后toggle 2的倍数，然后toggle 3的倍数。。。直到n轮之后，还有多少开的？
+
+有规律可循，可以发现只有平方数是打开的，参见[这里](https://www.hrwhisper.me/leetcode-bulb-switcher/)
+
+所以只要找出小与等于n的所有平方数即可。
 
 #### 258	Add Digits	48.1%	Easy
 将个个位数相加，直到结果为个位数时返回
 
-先循环，找规律：`out = (in - 1) % 9 + 1`
-
-见 [书影博客 观察法](http://bookshadow.com/weblog/2015/08/16/leetcode-add-digits/)
-
-
+先循环，找规律：`out = (in - 1) % 9 + 1`，见 [书影博客 观察法](http://bookshadow.com/weblog/2015/08/16/leetcode-add-digits/)
 
 #### 246	Strobogrammatic Number 	35.5%	Easy
-转180度，与之相同，相关的数字是0，1，6，8，9，所以判断起来就很简单了
+转180度，与之相同，相关的数字是0，1，6，8，9，所以判断起来就很简单了，略
 
 #### 247	Strobogrammatic Number II 	33.2%	Medium
 给定位数，找到所有的Strobogrammatic Number 
 
-如果只有1位，只能选0、1、8
-如果位数是偶数2k，则可选的数量是5^(k-1) * 4，因为0不能在第一位
-如果位数是奇数2k+1，则数量是5^(k-1) * 4 * 3
+* 如果只有1位，只能选0、1、8
+* 如果位数是偶数2k，则可选的数量是5^(k-1) * 4，因为0不能在第一位
+* 如果位数是奇数2k+1，则数量是5^(k-1) * 4 * 3
 
 最后需要递归打印出所有数字
-todo or 略
+
+	val map = Map(0 -> 0, 1 -> 1, 8 -> 8, 6 -> 9, 9 -> 6)
+	def strobogrammaticNumbers(k: Int) : List[String] = k match {
+	  case x if x <= 0 => List("")
+	  case 1 => List("0","1","8")
+	  case _ =>
+	    var res: List[String] = Nil
+	    for((key, value) <- map) {
+	      //println(k + " " + (key, value))
+	      res = res ::: (strobogrammaticNumbers(k - 2) map(key + _ + value))
+	    }
+	    res
+	}
+	strobogrammaticNumbers(0)
+	strobogrammaticNumbers(1)
+	strobogrammaticNumbers(2).filterNot(_.startsWith("0"))
+	strobogrammaticNumbers(3).filterNot(_.startsWith("0"))
+
+
 
 #### 248	Strobogrammatic Number III 	25.5%	Hard
 求在给定范围`low <= num <= high`内的Strobogrammatic Number 数
 
-其实就是在#247的基础上确定约束
-todo or 略
+其实就是在#247的基础上增加约束，略
 
 
 #### 263	Ugly Number	35.8%	Easy
-只有2、3、5三个因子的数
-while循环求余即可
+只有2、3、5三个因子的数。while循环求余即可
 
 #### 264	Ugly Number II	26.7%	Medium
 找到第n个ugly number
 
-归并排序3个数列，todo
+归并排序3个数列，可以参考[书影博客的解答](http://bookshadow.com/weblog/2015/08/19/leetcode-ugly-number-ii/)
 
 #### 313	Super Ugly Number	32.2%	Medium
 给定质数作为丑陋数的给定因子，是#264的普遍情况
 
-见[https://segmentfault.com/a/1190000004187449](https://segmentfault.com/a/1190000004187449)
+见[segmentfault上的一个解答](https://segmentfault.com/a/1190000004187449)
 
 #### 29	Divide Two Integers	15.5%	Medium
 计算两数相除，不能用乘法、除法和mod
@@ -142,9 +177,6 @@ while循环求余即可
 自虐型，方法有：
 * 用减法 复杂度O(n)
 * 用二的幂次表示 见[http://blog.csdn.net/linhuanmars/article/details/20024907](http://blog.csdn.net/linhuanmars/article/details/20024907)
-
-
-
 
 ### 几何
 
@@ -174,23 +206,7 @@ todo 找出在一个线上的点
 
 
 
-
-
-
-
-
-
-
-
-319	Bulb Switcher	39.5%	Medium
-有n个灯，初始都灭，第一遍都开，然后toggle 2的倍数，然后toggle 3的倍数。。。直到n轮之后，还有多少开的？
-
-有规律可循
-https://www.hrwhisper.me/leetcode-bulb-switcher/
-
-
-
-
+### 应该划到string？
 
 224	Basic Calculator	21.2%	Medium
 非负整数 括号的四则运算
@@ -222,8 +238,16 @@ Given numerator = 2, denominator = 3, return "0.(6)".
 todo
 
 
-65	Valid Number	11.9%	Hard
+#### 65	Valid Number	11.9%	Hard
 
+Validate if a given string is numeric.
 
+Some examples:
+"0" => true
+" 0.1 " => true
+"abc" => false
+"1 a" => false
+"2e10" => true
+Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
 
 
