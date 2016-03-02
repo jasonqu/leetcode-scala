@@ -109,12 +109,60 @@ n可正可负，返回值为Double类型，可以[递归使用二分法](http://
 
 可以使用Map保存历史，循环操作即可，略
 
+	val x = 19
+	var map = Map[Int, Int]()
+	var sum = x
+	while(sum != 1 && !map.contains(sum)) {
+	  val tmp = sum
+	  sum = tmp.toString.map(_.toString.toInt).map(x => x*x).sum
+	  map = map + (tmp -> sum)
+	}
+	println("sum " + sum + "  " + map.get(sum))
+	sum
+
+
+#### 166	Fraction to Recurring Decimal	14.7%	Medium
+写出分数的数字形式：
+
+> Given numerator = 1, denominator = 2, return "0.5".
+> Given numerator = 2, denominator = 1, return "2".
+> Given numerator = 2, denominator = 3, return "0.(6)".
+
+想法是当除数出现重复的时候，就可以确定重复的小数部分是什么了
+
+def fraction(numer: Int, denom: Int): String = {
+	var (x, y) = (numer / denom, numer % denom)
+	if(y == 0) x
+	else {
+		var str = x + "."
+		var map = Map[Int, Int]()
+		var list = List[(Int, Int)]() // numer -> numer / denom
+		var n = 0
+		while(y != 0 || map.contains(y * 10)) {
+		  val n = y * 10
+		  x = n / denom
+		  y = n % denom
+		  map = map + (n -> x)
+		  list = (n -> x) :: list
+		}
+		val z = if(y == 0) str + list.map(_._2).reverse.mkString("")
+		else {
+		  val (nonrepeat, repeat) = list.reverse.span(_._1 == y* 10)
+		  str + nonrepeat.mkString("") + repeat.mkString("(", "", ")")
+		}
+	}
+
+	
+}
+
+todo 待验证
+
 #### 319	Bulb Switcher	39.5%	Medium
 有n个灯，初始都灭，第一遍都开，然后toggle 2的倍数，然后toggle 3的倍数。。。直到n轮之后，还有多少开的？
 
 有规律可循，可以发现只有平方数是打开的，参见[这里](https://www.hrwhisper.me/leetcode-bulb-switcher/)
 
-所以只要找出小与等于n的所有平方数即可。
+所以只要找出小与等于n的所有平方数即可。略
 
 #### 258	Add Digits	48.1%	Easy
 将个个位数相加，直到结果为个位数时返回
@@ -178,6 +226,8 @@ n可正可负，返回值为Double类型，可以[递归使用二分法](http://
 * 用减法 复杂度O(n)
 * 用二的幂次表示 见[http://blog.csdn.net/linhuanmars/article/details/20024907](http://blog.csdn.net/linhuanmars/article/details/20024907)
 
+但感觉都不完美
+
 ### 几何
 
 #### 223	Rectangle Area	29.2%	Easy
@@ -229,13 +279,6 @@ todo
 todo
 
 
-166	Fraction to Recurring Decimal	14.7%	Medium
-写出分数的数字形式：
-Given numerator = 1, denominator = 2, return "0.5".
-Given numerator = 2, denominator = 1, return "2".
-Given numerator = 2, denominator = 3, return "0.(6)".
-
-todo
 
 
 #### 65	Valid Number	11.9%	Hard

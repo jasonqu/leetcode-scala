@@ -7,20 +7,20 @@
 * [ ] 329	Longest Increasing Path in a Matrix	29.9%	Medium
 * [x] 328	[list](list.md)	Odd Even Linked List	37.8%	Easy
 * [ ] 327	Count of Range Sum	24.4%	Hard
-* [ ] 326	Power of Three	35.4%	Easy
+* [-] 326	[Math](math.md)	Power of Three	35.4%	Easy
 * [ ] 325	Maximum Size Subarray Sum Equals k 	38.8%	Easy
 * [ ] 324	Wiggle Sort II	21.0%	Medium
 * [ ] 323	Number of Connected Components in an Undirected Graph 	42.9%	Medium
 * [ ] 322	Coin Change	24.6%	Medium
 * [ ] 321	Create Maximum Number	19.3%	Hard
 * [ ] 320	Generalized Abbreviation 	39.6%	Medium
-* [ ] 319	Bulb Switcher	39.5%	Medium
+* [x] 319	[Math](math.md)	Bulb Switcher	39.5%	Medium
 * [ ] 318	Maximum Product of Word Lengths	38.8%	Medium
 * [ ] 317	Shortest Distance from All Buildings 	30.1%	Hard
 * [ ] 316	Remove Duplicate Letters	23.6%	Medium
 * [ ] 315	Count of Smaller Numbers After Self	28.7%	Hard
 * [ ] 314	Binary Tree Vertical Order Traversal 	30.5%	Medium
-* [ ] 313	Super Ugly Number	31.8%	Medium
+* [-] 313	[Math](math.md)	Super Ugly Number	31.8%	Medium
 * [ ] 312	Burst Balloons	34.1%	Hard
 * [ ] 311	Sparse Matrix Multiplication 	47.1%	Medium
 * [ ] 310	Minimum Height Trees	25.9%	Medium
@@ -60,21 +60,21 @@
 * [ ] 276	Paint Fence 	30.0%	Easy
 * [ ] 275	H-Index II	32.2%	Medium
 * [ ] 274	H-Index	28.6%	Medium
-* [ ] 273	Integer to English Words	18.0%	Medium
+* [-] 273	[Math](math.md)	Integer to English Words	18.0%	Medium
 * [ ] 272	Closest Binary Search Tree Value II 	31.6%	Hard
 * [ ] 271	Encode and Decode Strings 	26.9%	Medium
 * [x] 270	Closest Binary Search Tree Value 	33.1%	Easy
 * [ ] 269	Alien Dictionary 	21.8%	Hard
-* [ ] 268	Missing Number	39.0%	Medium
+* [x] 268	[Math](math.md)	Missing Number	39.0%	Medium
 * [ ] 267	Palindrome Permutation II 	26.7%	Medium
 * [ ] 266	Palindrome Permutation 	49.6%	Easy
 * [ ] 265	Paint House II 	34.6%	Hard
-* [ ] 264	Ugly Number II	26.4%	Medium
-* [ ] 263	Ugly Number	35.7%	Easy
+* [-] 264	[Math](math.md)	Ugly Number II	26.4%	Medium
+* [-] 263	[Math](math.md)	Ugly Number	35.7%	Easy
 * [ ] 261	Graph Valid Tree 	31.0%	Medium
 * [ ] 260	Single Number III	42.5%	Medium
 * [ ] 259	3Sum Smaller 	37.6%	Medium
-* [ ] 258	Add Digits	48.1%	Easy
+* [-] 258	[Math](math.md)	Add Digits	48.1%	Easy
 * [-] 257	[Tree](tree.md)	Binary Tree Paths	27.0%	Easy
 * [ ] 256	Paint House 	41.7%	Medium
 * [x] 255	[Tree](tree.md)	Verify Preorder Sequence in Binary Search Tree 	36.0%	Medium
@@ -84,9 +84,9 @@
 * [ ] 251	Flatten 2D Vector 	32.5%	Medium
 * [-] 250	[Tree](tree.md)	Count Univalue Subtrees 	35.4%	Medium
 * [ ] 249	Group Shifted Strings 	30.8%	Easy
-* [ ] 248	Strobogrammatic Number III 	25.3%	Hard
-* [ ] 247	Strobogrammatic Number II 	33.0%	Medium
-* [ ] 246	Strobogrammatic Number 	35.4%	Easy
+* [-] 248	[Math](math.md)	Strobogrammatic Number III 	25.3%	Hard
+* [x] 247	[Math](math.md)	Strobogrammatic Number II 	33.0%	Medium
+* [-] 246	[Math](math.md)	Strobogrammatic Number 	35.4%	Easy
 * [ ] 245	Shortest Word Distance III 	45.6%	Medium
 * [ ] 244	Shortest Word Distance II 	34.9%	Medium
 * [ ] 243	Shortest Word Distance 	45.7%	Easy
@@ -99,9 +99,9 @@
 * [-] 236	[Tree](tree.md)	Lowest Common Ancestor of a Binary Tree	28.5%	Medium
 * [-] 235	[Tree](tree.md)	Lowest Common Ancestor of a Binary Search Tree	38.0%	Easy
 * [x] 234	[list](list.md)	Palindrome Linked List	26.8%	Easy
-* [ ] 233	Number of Digit One	23.7%	Medium
+* [-] 233	[Math](math.md)	Number of Digit One	23.7%	Medium
 * [ ] 232	Implement Queue using Stacks	33.9%	Easy
-* [ ] 231	Power of Two	35.0%	Easy
+* [-] 231	[Math](math.md)	Power of Two	35.0%	Easy
 * [-] 230	[Tree](tree.md)	Kth Smallest Element in a BST	35.9%	Medium
 * [x] 229	[array](array.md)	Majority Element II	25.1%	Medium
 * [x] 228	[array](array.md)	Summary Ranges	23.0%	Easy
@@ -109,7 +109,7 @@
 * [-] 226	[Tree](tree.md)	Invert Binary Tree	43.7%	Easy
 * [ ] 225	Implement Stack using Queues	30.4%	Easy
 * [ ] 224	Basic Calculator	20.9%	Medium
-* [ ] 223	Rectangle Area	29.1%	Easy
+* [x] 223	[Math](math.md)	Rectangle Area	29.1%	Easy
 * [ ] 222	Count Complete Tree Nodes	24.1%	Medium
 * [ ] 221	Maximal Square	22.8%	Medium
 * [ ] 220	Contains Duplicate III	18.1%	Medium
@@ -128,9 +128,9 @@
 * [ ] 207	Course Schedule	25.8%	Medium
 * [x] 206	[list](list.md)	Reverse Linked List	38.0%	Easy
 * [ ] 205	Isomorphic Strings	28.5%	Easy
-* [ ] 204	Count Primes	23.3%	Easy
+* [x] 204	[Math](math.md)	Count Primes	23.3%	Easy
 * [x] 203	[list](list.md)	Remove Linked List Elements	27.8%	Easy
-* [ ] 202	Happy Number	35.6%	Easy
+* [x] 202	[Math](math.md)	Happy Number	35.6%	Easy
 * [ ] 201	Bitwise AND of Numbers Range	29.2%	Medium
 * [ ] 200	Number of Islands	26.6%	Medium
 * [ ] 199	Binary Tree Right Side View	32.8%	Medium
@@ -144,13 +144,13 @@
 * [ ] 179	Largest Number	18.2%	Medium
 * [ ] 174	Dungeon Game	20.2%	Hard
 * [ ] 173	Binary Search Tree Iterator	33.2%	Medium
-* [ ] 172	Factorial Trailing Zeroes	31.7%	Easy
-* [ ] 171	Excel Sheet Column Number	40.2%	Easy
+* [-] 172	[Math](math.md)	Factorial Trailing Zeroes	31.7%	Easy
+* [-] 171	[Math](math.md)	Excel Sheet Column Number	40.2%	Easy
 * [ ] 170	Two Sum III - Data structure design 	24.2%	Easy
 * [x] 169	[array](array.md)	Majority Element	39.8%	Easy
-* [ ] 168	Excel Sheet Column Title	20.8%	Easy
+* [-] 168	[Math](math.md)	Excel Sheet Column Title	20.8%	Easy
 * [ ] 167	Two Sum II - Input array is sorted 	47.0%	Medium
-* [ ] 166	Fraction to Recurring Decimal	14.6%	Medium
+* [todo] 166	[Math](math.md)	Fraction to Recurring Decimal	14.6%	Medium
 * [ ] 165	Compare Version Numbers	16.8%	Easy
 * [ ] 164	Maximum Gap	26.1%	Hard
 * [ ] 163	Missing Ranges 	28.2%	Medium
@@ -247,9 +247,9 @@
 * [ ] 72	Edit Distance	28.0%	Hard
 * [ ] 71	Simplify Path	21.4%	Medium
 * [ ] 70	Climbing Stairs	36.1%	Easy
-* [ ] 69	Sqrt(x)	24.7%	Medium
+* [-] 69	[Math](math.md)	Sqrt(x)	24.7%	Medium
 * [ ] 68	Text Justification	15.7%	Hard
-* [ ] 67	Add Binary	26.5%	Easy
+* [-] 67	[Math](math.md)	Add Binary	26.5%	Easy
 * [x] 66	[array](array.md)	Plus One	32.6%	Easy
 * [ ] 65	Valid Number	11.9%	Hard
 * [ ] 64	Minimum Path Sum	34.1%	Medium
@@ -266,7 +266,7 @@
 * [ ] 53	Maximum Subarray	36.0%	Medium
 * [ ] 52	N-Queens II	38.4%	Hard
 * [ ] 51	N-Queens	26.2%	Hard
-* [ ] 50	Pow(x, n)	27.9%	Medium
+* [-] 50	[Math](math.md)	Pow(x, n)	27.9%	Medium
 * [ ] 49	Group Anagrams	26.5%	Medium
 * [ ] 48	Rotate Image	33.9%	Medium
 * [ ] 47	Permutations II	27.3%	Medium
@@ -287,7 +287,7 @@
 * [ ] 32	Longest Valid Parentheses	22.1%	Hard
 * [ ] 31	Next Permutation	26.0%	Medium
 * [ ] 30	Substring with Concatenation of All Words	20.4%	Hard
-* [ ] 29	Divide Two Integers	15.4%	Medium
+* [-] 29	[Math](math.md)	Divide Two Integers	15.4%	Medium
 * [ ] 28	Implement strStr()	24.2%	Easy
 * [x] 27	[array](array.md)	Remove Element	32.9%	Easy
 * [x] 26	[array](array.md)	Remove Duplicates from Sorted Array	32.8%	Easy
@@ -303,13 +303,13 @@
 * [ ] 16	3Sum Closest	28.4%	Medium
 * [ ] 15	3Sum	18.2%	Medium
 * [ ] 14	Longest Common Prefix	27.3%	Easy
-* [ ] 13	Roman to Integer	37.9%	Easy
-* [ ] 12	Integer to Roman	37.4%	Medium
+* [-] 13	[Math](math.md)	Roman to Integer	37.9%	Easy
+* [-] 12	[Math](math.md)	Integer to Roman	37.4%	Medium
 * [ ] 11	Container With Most Water	33.8%	Medium
 * [ ] 10	Regular Expression Matching	21.6%	Hard
-* [ ] 9	Palindrome Number	30.7%	Easy
-* [ ] 8	String to Integer (atoi)	13.3%	Easy
-* [ ] 7	Reverse Integer	23.6%	Easy
+* [x] 9	[Math](math.md)	Palindrome Number	30.7%	Easy
+* [x] 8	[Math](math.md)	String to Integer (atoi)	13.3%	Easy
+* [x] 7	[Math](math.md)	Reverse Integer	23.6%	Easy
 * [ ] 6	ZigZag Conversion	23.2%	Easy
 * [ ] 5	Longest Palindromic Substring	22.4%	Medium
 * [ ] 4	Median of Two Sorted Arrays	18.1%	Hard
