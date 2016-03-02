@@ -30,7 +30,7 @@ def maxSub(arr: Array[Int]) : Int = {
 }
 ```
 
-* 152	Maximum Product Subarray	21.5%	Medium
+#### 152	Maximum Product Subarray	21.5%	Medium
 题目要求是Array[Int]，所以比较简单，只需关注上一个值是否为0即可。
 TODO
 
@@ -92,7 +92,7 @@ Best Time to Buy and Sell Stock系列
 http://liangjiabin.com/blog/2015/04/leetcode-best-time-to-buy-and-sell-stock.html
 
 
-* 121	Best Time to Buy and Sell Stock	35.2%	Medium
+#### 121	Best Time to Buy and Sell Stock	35.2%	Medium
 只有一次机会
 
 dp(n)表示一个算法，其结果类型为(i:Int, j:Int)表示买入和卖出点坐标，其中i≤j，使之对任意0≤i1≤j1≤n，有arr(j) - arr(i) ≥ arr(j1) - arr(i1)
@@ -125,7 +125,7 @@ def bestTransaction(prices: Array[Int]): (Int, Int, Int) = {
 }
 ```
 
-* 122	Best Time to Buy and Sell Stock II	41.3%	Medium
+#### 122	Best Time to Buy and Sell Stock II	41.3%	Medium
 不限次数，就把每一次上涨都包括进来即可
 
 ```
@@ -147,7 +147,7 @@ def bestTransactions(prices: Array[Int]): (Int, List[(Int, Int)]) = {
 }
 ```
 
-* 123 Best Time to Buy and Sell Stock III 25.6% Hard
+#### 123 Best Time to Buy and Sell Stock III 25.6% Hard
 只有2次机会
 
 以第i天为分界线，计算第i天之前进行一次交易的最大收益preProfit[i]，和第i天之后进行一次交易的最大收益postProfit[i]，最后遍历一遍，max{preProfit[i] + postProfit[i]} (0≤i≤n-1)就是最大收益。第i天之前和第i天之后进行一次的最大收益求法同Best Time to Buy and Sell Stock I。
@@ -155,7 +155,7 @@ def bestTransactions(prices: Array[Int]): (Int, List[(Int, Int)]) = {
 todo
 
 
-* 188	Best Time to Buy and Sell Stock IV	21.3%	Hard
+#### 188	Best Time to Buy and Sell Stock IV	21.3%	Hard
 
 todo
 
@@ -210,7 +210,7 @@ if(curMin > i2) {
 
 
 
-70	Climbing Stairs	36.1%	Easy
+#### 70	Climbing Stairs	36.1%	Easy
 Climbing Stairs
 dp[i] = dp[i - 1] + dp[i - 2]
 dp[1] = 1
@@ -234,7 +234,7 @@ http://bangbingsyb.blogspot.com/2014/11/leetcode-unique-paths-i-ii.html
 
 
 
-62	Unique Paths	35.3%	Medium
+#### 62	Unique Paths	35.3%	Medium
 
 ```
 dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
@@ -254,7 +254,7 @@ def path(m:Int, n:Int) :Int = {
 }
 ```
 
-63	Unique Paths II	28.9%	Medium
+#### 63	Unique Paths II	28.9%	Medium
 如果有障碍，则dp[i][j]=0，需要传入一个辅助矩阵【大小必须为m*n】表示该点是否有障碍，如果有障碍，则obstacles(i)(j)=1
 
 ```
@@ -275,7 +275,7 @@ arr.deep
 path(3, 10, arr)
 ```
 
-* 64	Minimum Path Sum	34.1%	Medium
+#### 64	Minimum Path Sum	34.1%	Medium
 和前面类似，只是矩阵带有权值，求权值和最小的路径，和前面类似，比较两种选择中最小的即可。
 
 ```
@@ -303,7 +303,7 @@ def minpath(matrix: Array[Array[Int]]) : Int = {
 }
 ```
 
-* 120	Triangle	29.3%	Medium
+#### 120	Triangle	29.3%	Medium
 给定带权三角，求其从定点到底边权值最小的路径，与上题类似
 
 ```
@@ -333,7 +333,7 @@ minpath(tri)
 ```
 
 
-96	Unique Binary Search Trees	36.8%	Medium
+#### 96	Unique Binary Search Trees	36.8%	Medium
 存储1到n的二叉树有多少种。
 
 令dp(n)表示包含n个节点的BST数量
@@ -360,11 +360,11 @@ def uniqBST(n : Int) : Int = {
 ```
 
 
-95	Unique Binary Search Trees II	28.8%	Medium
+#### 95	Unique Binary Search Trees II	28.8%	Medium
 将树生成出来
 todo
 
-279	Perfect Squares	31.2%	Medium
+#### 279	Perfect Squares	31.2%	Medium
 
 动态规划：从新手到专家
 http://www.hawstein.com/posts/dp-novice-to-advanced.html

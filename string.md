@@ -2,17 +2,60 @@
 
 String在scala中可以被看做是一个Char的Array，因此也可以方便的使用集合操作.它甚至可以被看做是Array[Int]的特例，因为Char的范围比Int要小的多。
 
+#### 14	Longest Common Prefix	27.5%	Easy
+给定一组String，确定其最长前缀
+
+只需要一个个确定其头部是否相同即可
+
+	def longestPrefix(strs: List[String]) : String = {
+	  var i = 1
+	  var found = false
+	  while(i <= strs.head.length && !found) {
+	    val prefix = strs.head.substring(0, i)
+	    if(!strs.forall(_.startsWith(prefix))) found = true
+	    i = i + 1
+	  }
+	  strs.head.substring(0, i - 1)
+	}
+
+
+#### 20	Valid Parentheses	28.7%	Easy
+确定一串括号是否合乎文法，如"()[]{}"合法，但是"([)]"不合法
+
+使用一个List来模拟栈即可：
+
+	def validParentheses(str: String) : Boolean = {
+	  var list = List[Char]()
+	  var valid = true
+	  var i = 0
+	  val map = Map(')' -> '(', ']' -> '[', '}' -> '{')
+	  val set = Set('(', '[', '{')
+	  while(i < str.length && valid) {
+	    val c = str(i)
+	    if(set.contains(c)) list = c :: list
+	    else list match {
+	      case Nil => valid = false
+	      case head :: tail =>
+	        if(head != map.get(c).get) valid = false
+	        else list = tail
+	      case _ =>
+	    }
+	    i = i + 1
+	  }
+	  valid
+	}
+
+
+#### 125	Valid Palindrome	23.4%	Easy
+见#234
 
 
 
-14	Longest Common Prefix	27.5%	Easy
-67	Add Binary	26.7%	Easy
-20	Valid Parentheses	28.7%	Easy
+
 165	Compare Version Numbers	17.0%	Easy
 38	Count and Say	28.1%	Easy
 58	Length of Last Word	28.8%	Easy
 6	ZigZag Conversion	23.3%	Easy
-125	Valid Palindrome	23.4%	Easy
 293	Flip Game 	49.1%	Easy
 249	Group Shifted Strings 	31.0%	Easy
 28	Implement strStr()	24.3%	Easy

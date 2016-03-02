@@ -130,32 +130,38 @@ n可正可负，返回值为Double类型，可以[递归使用二分法](http://
 
 想法是当除数出现重复的时候，就可以确定重复的小数部分是什么了
 
-def fraction(numer: Int, denom: Int): String = {
-	var (x, y) = (numer / denom, numer % denom)
-	if(y == 0) x
-	else {
-		var str = x + "."
-		var map = Map[Int, Int]()
-		var list = List[(Int, Int)]() // numer -> numer / denom
-		var n = 0
-		while(y != 0 || map.contains(y * 10)) {
-		  val n = y * 10
-		  x = n / denom
-		  y = n % denom
-		  map = map + (n -> x)
-		  list = (n -> x) :: list
-		}
-		val z = if(y == 0) str + list.map(_._2).reverse.mkString("")
-		else {
-		  val (nonrepeat, repeat) = list.reverse.span(_._1 == y* 10)
-		  str + nonrepeat.mkString("") + repeat.mkString("(", "", ")")
-		}
-	}
+```
+import Math._
 
-	
+def fraction(numer: Int, denom: Int): String = {
+  var (x, y) = (numer / denom, numer % denom)
+  if (y == 0) x.toString
+  else {
+    val deno = abs(denom)
+    val prefix = (if(numer * denom < 0) "-" else "") + x + "."
+    var map = Map[Int, Int]()
+    var list = List[(Int, Int)]() // numer -> numer / denom
+    var n = 0
+    while (y != 0 && !map.contains(y * 10)) {
+      val n = y * 10
+      x = n / deno
+      y = n % deno
+      map = map + (n -> x)
+      list = (n -> x) :: list
+    }
+    if (y == 0) prefix + list.map(_._2).reverse.mkString("")
+    else {
+      val (nonrepeat, repeat) = list.reverse.span(_._1 != y * 10)
+      prefix + nonrepeat.map(_._2).mkString("") + repeat.map(_._2).mkString("(", "", ")")
+    }
+  }
 }
 
-todo 待验证
+fraction(-4, 2)
+fraction(3, 2)
+fraction(3, 7)
+fraction(23, -130)
+```
 
 #### 319	Bulb Switcher	39.5%	Medium
 有n个灯，初始都灭，第一遍都开，然后toggle 2的倍数，然后toggle 3的倍数。。。直到n轮之后，还有多少开的？
@@ -227,6 +233,7 @@ todo 待验证
 * 用二的幂次表示 见[http://blog.csdn.net/linhuanmars/article/details/20024907](http://blog.csdn.net/linhuanmars/article/details/20024907)
 
 但感觉都不完美
+
 
 ### 几何
 

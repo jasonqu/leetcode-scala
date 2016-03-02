@@ -150,7 +150,7 @@
 * [x] 169	[array](array.md)	Majority Element	39.8%	Easy
 * [-] 168	[Math](math.md)	Excel Sheet Column Title	20.8%	Easy
 * [ ] 167	Two Sum II - Input array is sorted 	47.0%	Medium
-* [todo] 166	[Math](math.md)	Fraction to Recurring Decimal	14.6%	Medium
+* [x] 166	[Math](math.md)	Fraction to Recurring Decimal	14.6%	Medium
 * [ ] 165	Compare Version Numbers	16.8%	Easy
 * [ ] 164	Maximum Gap	26.1%	Hard
 * [ ] 163	Missing Ranges 	28.2%	Medium
