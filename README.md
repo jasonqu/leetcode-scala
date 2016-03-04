@@ -9,7 +9,12 @@
 * LinkedList -> [list.md](list.md)
 * Array -> [array.md](array.md)
 * Tree -> [tree.md](tree.md)
+* Math -> [math.md](math.md)
 * Dynamic Programming -> [dynamic.md](dynamic.md)
+* String -> [string.md](string.md)
+
+
+* String -> [string.md](string.md)
 
 
 也可以通过[索引](index.md)来查找题目所对应的分类

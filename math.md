@@ -251,53 +251,8 @@ fraction(23, -130)
 #### 335	Self Crossing	18.0%	Medium
 都是正整数，有没有相交
 
-
-
 #### 296	Best Meeting Point 	45.6%	Hard
 todo
 
 #### 149	Max Points on a Line	14.0%	Hard
 todo 找出在一个线上的点
-
-
-
-
-
-### 应该划到string？
-
-224	Basic Calculator	21.2%	Medium
-非负整数 括号的四则运算
-略？
-
-
-43	Multiply Strings	22.9%	Medium
-将string代表的数字相乘
-数字可能很大，超过Int等
-todo
-
-
-
-
-
-
-
-60	Permutation Sequence	24.6%	Medium
-求出排好序的第k个排列
-todo
-
-
-
-
-#### 65	Valid Number	11.9%	Hard
-
-Validate if a given string is numeric.
-
-Some examples:
-"0" => true
-" 0.1 " => true
-"abc" => false
-"1 a" => false
-"2e10" => true
-Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
-
-

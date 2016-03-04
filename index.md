@@ -54,7 +54,7 @@
 * [ ] 282	Expression Add Operators	23.3%	Hard
 * [ ] 281	Zigzag Iterator 	41.1%	Medium
 * [ ] 280	Wiggle Sort 	49.1%	Medium
-* [ ] 279	Perfect Squares	31.2%	Medium
+* [x] 279	[Dynamic](dynamic.md)	Perfect Squares	31.2%	Medium
 * [x] 278	[array](array.md)	First Bad Version	21.8%	Easy
 * [ ] 277	Find the Celebrity 	35.0%	Medium
 * [ ] 276	Paint Fence 	30.0%	Easy
@@ -83,7 +83,7 @@
 * [ ] 252	Meeting Rooms 	40.9%	Easy
 * [ ] 251	Flatten 2D Vector 	32.5%	Medium
 * [-] 250	[Tree](tree.md)	Count Univalue Subtrees 	35.4%	Medium
-* [ ] 249	Group Shifted Strings 	30.8%	Easy
+* [x] 249	[String](string.md)	Group Shifted Strings 	30.8%	Easy
 * [-] 248	[Math](math.md)	Strobogrammatic Number III 	25.3%	Hard
 * [x] 247	[Math](math.md)	Strobogrammatic Number II 	33.0%	Medium
 * [-] 246	[Math](math.md)	Strobogrammatic Number 	35.4%	Easy
@@ -140,7 +140,7 @@
 * [x] 189	[array](array.md)	Rotate Array	20.4%	Easy
 * [ ] 188	Best Time to Buy and Sell Stock IV	21.3%	Hard
 * [ ] 187	Repeated DNA Sequences	24.0%	Medium
-* [ ] 186	Reverse Words in a String II 	29.7%	Medium
+* [-] 186	[String](string.md)	Reverse Words in a String II 	29.7%	Medium
 * [ ] 179	Largest Number	18.2%	Medium
 * [ ] 174	Dungeon Game	20.2%	Hard
 * [ ] 173	Binary Search Tree Iterator	33.2%	Medium
@@ -151,7 +151,7 @@
 * [-] 168	[Math](math.md)	Excel Sheet Column Title	20.8%	Easy
 * [ ] 167	Two Sum II - Input array is sorted 	47.0%	Medium
 * [x] 166	[Math](math.md)	Fraction to Recurring Decimal	14.6%	Medium
-* [ ] 165	Compare Version Numbers	16.8%	Easy
+* [x] 165	[String](string.md)	Compare Version Numbers	16.8%	Easy
 * [ ] 164	Maximum Gap	26.1%	Hard
 * [ ] 163	Missing Ranges 	28.2%	Medium
 * [ ] 162	Find Peak Element	32.7%	Medium
@@ -164,9 +164,9 @@
 * [ ] 155	Min Stack	21.5%	Easy
 * [todo] 154	[array](array.md)	Find Minimum in Rotated Sorted Array II	33.8%	Hard
 * [x] 153	[array](array.md)	Find Minimum in Rotated Sorted Array	35.4%	Medium
-* [ ] 152	Maximum Product Subarray	21.5%	Medium
-* [ ] 151	Reverse Words in a String	15.6%	Medium
-* [ ] 150	Evaluate Reverse Polish Notation	22.9%	Medium
+* [x] 152	[Dynamic](dynamic.md)	Maximum Product Subarray	21.5%	Medium
+* [x] 151	[String](string.md)	Reverse Words in a String	15.6%	Medium
+* [x] 150	[String](string.md)	Evaluate Reverse Polish Notation	22.9%	Medium
 * [ ] 149	Max Points on a Line	14.0%	Hard
 * [x] 148	[list](list.md) Sort List	24.1%	Medium
 * [-] 147	[x]	Insertion Sort List	28.6%	Medium
@@ -191,12 +191,12 @@
 * [ ] 128	Longest Consecutive Sequence	31.4%	Hard
 * [ ] 127	Word Ladder	19.6%	Medium
 * [ ] 126	Word Ladder II	13.5%	Hard
-* [ ] 125	Valid Palindrome	23.3%	Easy
+* [-] 125	[String](string.md)	Valid Palindrome	23.3%	Easy
 * [ ] 124	Binary Tree Maximum Path Sum	22.8%	Hard
 * [ ] 123	Best Time to Buy and Sell Stock III	25.6%	Hard
-* [ ] 122	Best Time to Buy and Sell Stock II	41.3%	Medium
-* [ ] 121	Best Time to Buy and Sell Stock	35.2%	Medium
-* [ ] 120	Triangle	29.4%	Medium
+* [x] 122	[Dynamic](dynamic.md)	Best Time to Buy and Sell Stock II	41.3%	Medium
+* [x] 121	[Dynamic](dynamic.md)	Best Time to Buy and Sell Stock	35.2%	Medium
+* [x] 120	[Dynamic](dynamic.md)	Triangle	29.4%	Medium
 * [x] 119	[array](array.md)	Pascal's Triangle II	31.4%	Easy
 * [x] 118	[array](array.md)	Pascal's Triangle	32.4%	Easy
 * [ ] 117	Populating Next Right Pointers in Each Node II	32.6%	Hard
@@ -220,7 +220,7 @@
 * [x] 99	[Tree](tree.md)	Recover Binary Search Tree	25.8%	Hard
 * [x] 98	[Tree](tree.md)	Validate Binary Search Tree	20.7%	Medium
 * [ ] 97	Interleaving String	22.0%	Hard
-* [ ] 96	Unique Binary Search Trees	36.8%	Medium
+* [x] 96	[Dynamic](dynamic.md)	Unique Binary Search Trees	36.8%	Medium
 * [ ] 95	Unique Binary Search Trees II	28.8%	Medium
 * [x] 94	[Tree](tree.md)	Binary Tree Inorder Traversal	38.7%	Medium
 * [ ] 93	Restore IP Addresses	22.7%	Medium
@@ -245,50 +245,50 @@
 * [ ] 74	Search a 2D Matrix	33.2%	Medium
 * [ ] 73	Set Matrix Zeroes	32.9%	Medium
 * [ ] 72	Edit Distance	28.0%	Hard
-* [ ] 71	Simplify Path	21.4%	Medium
-* [ ] 70	Climbing Stairs	36.1%	Easy
+* [x] 71	[String](string.md)	Simplify Path	21.4%	Medium
+* [x] 70	[Dynamic](dynamic.md)	Climbing Stairs	36.1%	Easy
 * [-] 69	[Math](math.md)	Sqrt(x)	24.7%	Medium
-* [ ] 68	Text Justification	15.7%	Hard
+* [x] 68	[String](string.md)	Text Justification	15.7%	Hard
 * [-] 67	[Math](math.md)	Add Binary	26.5%	Easy
 * [x] 66	[array](array.md)	Plus One	32.6%	Easy
 * [ ] 65	Valid Number	11.9%	Hard
-* [ ] 64	Minimum Path Sum	34.1%	Medium
-* [ ] 63	Unique Paths II	28.9%	Medium
-* [ ] 62	Unique Paths	35.3%	Medium
+* [x] 64	[Dynamic](dynamic.md)	Minimum Path Sum	34.1%	Medium
+* [x] 63	[Dynamic](dynamic.md)	Unique Paths II	28.9%	Medium
+* [x] 62	[Dynamic](dynamic.md)	Unique Paths	35.3%	Medium
 * [x] 61	[list](list.md)	Rotate List	22.5%	Medium
 * [ ] 60	Permutation Sequence	24.5%	Medium
 * [ ] 59	Spiral Matrix II	34.0%	Medium
-* [ ] 58	Length of Last Word	28.7%	Easy
+* [x] 58	[String](string.md)	Length of Last Word	28.7%	Easy
 * [ ] 57	Insert Interval	23.2%	Hard
 * [ ] 56	Merge Intervals	24.5%	Hard
 * [ ] 55	Jump Game	27.9%	Medium
 * [ ] 54	Spiral Matrix	22.0%	Medium
-* [ ] 53	Maximum Subarray	36.0%	Medium
+* [x] 53	[Dynamic](dynamic.md)	Maximum Subarray	36.0%	Medium
 * [ ] 52	N-Queens II	38.4%	Hard
 * [ ] 51	N-Queens	26.2%	Hard
 * [-] 50	[Math](math.md)	Pow(x, n)	27.9%	Medium
-* [ ] 49	Group Anagrams	26.5%	Medium
+* [x] 49	[String](string.md)	Group Anagrams	26.5%	Medium
 * [ ] 48	Rotate Image	33.9%	Medium
 * [ ] 47	Permutations II	27.3%	Medium
 * [ ] 46	Permutations	34.6%	Medium
 * [ ] 45	Jump Game II	24.9%	Hard
-* [ ] 44	Wildcard Matching	16.9%	Hard
+* [-] 44	[String](string.md)	Wildcard Matching	16.9%	Hard
 * [ ] 43	Multiply Strings	22.7%	Medium
 * [ ] 42	Trapping Rain Water	31.6%	Hard
 * [ ] 41	First Missing Positive	23.5%	Hard
 * [ ] 40	Combination Sum II	26.9%	Medium
 * [ ] 39	Combination Sum	30.1%	Medium
-* [ ] 38	Count and Say	27.9%	Easy
+* [-] 38	[String](string.md)	Count and Say	27.9%	Easy
 * [ ] 37	Sudoku Solver	24.1%	Hard
 * [ ] 36	Valid Sudoku	29.6%	Easy
 * [x] 35	[array](array.md)	Search Insert Position	36.8%	Medium
 * [x] 34	[array](array.md)	Search for a Range	28.6%	Medium
 * [todo?] 33	[array](array.md)	Search in Rotated Sorted Array	29.8%	Hard
-* [ ] 32	Longest Valid Parentheses	22.1%	Hard
+* [x] 32	[String](string.md)	Longest Valid Parentheses	22.1%	Hard
 * [ ] 31	Next Permutation	26.0%	Medium
 * [ ] 30	Substring with Concatenation of All Words	20.4%	Hard
 * [-] 29	[Math](math.md)	Divide Two Integers	15.4%	Medium
-* [ ] 28	Implement strStr()	24.2%	Easy
+* [-] 28	[String](string.md)	Implement strStr()	24.2%	Easy
 * [x] 27	[array](array.md)	Remove Element	32.9%	Easy
 * [x] 26	[array](array.md)	Remove Duplicates from Sorted Array	32.8%	Easy
 * [x] 25	[list](list.md)	Reverse Nodes in k-Group	26.9%	Hard
@@ -296,21 +296,21 @@
 * [x] 23	[list](list.md)	Merge k Sorted Lists	22.7%	Hard
 * [ ] 22	Generate Parentheses	35.6%	Medium
 * [todo] 21	[list](list.md)	Merge Two Sorted Lists	34.6%	Easy
-* [ ] 20	Valid Parentheses	28.5%	Easy
+* [x] 20	[String](string.md)	Valid Parentheses	28.5%	Easy
 * [x] 19	[list](list.md)	Remove Nth Node From End of List	28.6%	Easy
 * [ ] 18	4Sum	23.1%	Medium
 * [ ] 17	Letter Combinations of a Phone Number	27.7%	Medium
 * [ ] 16	3Sum Closest	28.4%	Medium
 * [ ] 15	3Sum	18.2%	Medium
-* [ ] 14	Longest Common Prefix	27.3%	Easy
+* [x] 14	[String](string.md)	Longest Common Prefix	27.3%	Easy
 * [-] 13	[Math](math.md)	Roman to Integer	37.9%	Easy
 * [-] 12	[Math](math.md)	Integer to Roman	37.4%	Medium
 * [ ] 11	Container With Most Water	33.8%	Medium
-* [ ] 10	Regular Expression Matching	21.6%	Hard
+* [x] 10	[String](string.md)	Regular Expression Matching	21.6%	Hard
 * [x] 9	[Math](math.md)	Palindrome Number	30.7%	Easy
 * [x] 8	[Math](math.md)	String to Integer (atoi)	13.3%	Easy
 * [x] 7	[Math](math.md)	Reverse Integer	23.6%	Easy
-* [ ] 6	ZigZag Conversion	23.2%	Easy
+* [-] 6	[String](string.md)	ZigZag Conversion	23.2%	Easy
 * [ ] 5	Longest Palindromic Substring	22.4%	Medium
 * [ ] 4	Median of Two Sorted Arrays	18.1%	Hard
 * [ ] 3	Longest Substring Without Repeating Characters	21.5%	Medium

@@ -1,4 +1,4 @@
-## Array
+## 动态规划
 
 ### 简介
 
@@ -9,19 +9,18 @@
 * [动态规划：从新手到专家](http://www.hawstein.com/posts/dp-novice-to-advanced.html)，[原文](https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/)
 * [背包问题九讲](http://love-oriented.com/pack/)
 
-todo
+### Array
 
 #### 53	Maximum Subarray	36.0%	Medium
-For example, given the array [-2,1,-3,4,-1,2,1,-5,4], the contiguous subarray [4,-1,2,1] has the
-largest sum = 6.
+最大子数组，例如，对数组 [-2,1,-3,4,-1,2,1,-5,4]，最大子数组是 [4,-1,2,1] ，其和为 6。
 
-local 与 global 找最优
-dp[i + 1] = max(dp[i], dp[i] + a[i + 1])
+本质上就是在 local 与 global 中找最优
+
+> global(i + 1) = max(global(i), max(local(i) + a(i + 1), a(i + 1)))
 
 ```
 def maxSub(arr: Array[Int]) : Int = {
-  var global = arr(0)
-  var local = arr(0)
+  var (global, local) = (arr(0), arr(0))
   for(i <- 1 until arr.length) {
     local = max(arr(i), local + arr(i))
     global = max(local, global)
@@ -31,13 +30,15 @@ def maxSub(arr: Array[Int]) : Int = {
 ```
 
 #### 152	Maximum Product Subarray	21.5%	Medium
+最大求积子数组，例如，对数组 [2,3,-2,4]，最大求积子数组是 [2,3] ，其积为 6。
+
 题目要求是Array[Int]，所以比较简单，只需关注上一个值是否为0即可。
-TODO
+
+> global(i + 1) = max(global(i), max(localabs(i) * a(i + 1), abs(a(i + 1))))
 
 ```
 def maxProd(arr: Array[Int]) : Int = {
-  var global = arr(0)
-  var localabs = arr(0)
+  var (global, localabs) = (arr(0), arr(0))
   for(i <- 1 until arr.length) {
     if(localabs == 0) {
       localabs = arr(i)
@@ -60,37 +61,10 @@ maxProd(Array(-3))
 
 如果是double呢？
 
+todo
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Best Time to Buy and Sell Stock系列
-http://liangjiabin.com/blog/2015/04/leetcode-best-time-to-buy-and-sell-stock.html
-
+"Best Time to Buy and Sell Stock"系列，参见[这里](http://liangjiabin.com/blog/2015/04/leetcode-best-time-to-buy-and-sell-stock.html)
 
 #### 121	Best Time to Buy and Sell Stock	35.2%	Medium
 只有一次机会
@@ -130,17 +104,13 @@ def bestTransaction(prices: Array[Int]): (Int, Int, Int) = {
 
 ```
 def bestTransactions(prices: Array[Int]): (Int, List[(Int, Int)]) = {
-  var profit = 0
-  var startidx = 0
-  var seq = List[(Int, Int)]()
+  var (profit, startidx, seq) = (0, 0, List[(Int, Int)]())
   for (i <- 1 until prices.length) {
     if (prices(i) > prices(i - 1)) {
       profit = profit + prices(i) - prices(i - 1)
     } else {
-      if (startidx < i - 1) {
-        seq = (startidx, i - 1) :: seq
-      }
-      startidx = i
+      if (startidx < i - 1) seq = (startidx, i - 1) :: seq
+      else startidx = i // startidx == i - 1
     }
   }
   (profit, seq)
@@ -154,7 +124,6 @@ def bestTransactions(prices: Array[Int]): (Int, List[(Int, Int)]) = {
 
 todo
 
-
 #### 188	Best Time to Buy and Sell Stock IV	21.3%	Hard
 
 todo
@@ -162,60 +131,16 @@ todo
 
 
 
-
-
-
-
-
-≥
-
-
-
-dp(n)表示一个算法，其结果类型为(i1:Int, j1:Int, i2:Int, j2:Int)表示两次买入和卖出点坐标，其中i1<=j1<=i2<=j2，使之对任意0<=a1<=b1<=a2<=b2<=n，有arr(j1) - arr(i1) + arr(j2) - arr(i2) >= arr(b1) - arr(a1) + arr(b2) - arr(a2)
-
-和只有一次机会[121](#121)类似，保留两个值，local最大值和global最大值，如果local大于global，则使用local的替换global的
-这里local是指以arr(n)为卖出点的最大值，只要拿当前值减去当前遇到的最小值即可
-
-curMin 表示当前遇到的最小值坐标 currentMinIndex，可以知道必有curMin = i1或curMin = i2或curMin > j2，可以反证法说明。
-
-保存一个curMinLocal表示大于或等于j2的最小坐标
-
-计算当前最大值arr(n) - arr(curMin) vglobal和arr(n) - arr(curMinLocal) vlocal，记前两个是v1 v2
-if(vlocal > v1 && curMinLocal > )
-
-
-if(curMin > i2) {
-  if( v > min(v1, v2)) {
-    max(v1, v2) + v
-  }
-} else if(curMin == i2) {
-  if(v > v2 || vlocal > v1) {
-  val inc1 = v - v2
-  val inc2 = vlocal - v1
-  if(inc1 > inc2) {
-    v1 + v
-  } else {
-    v2 + vlocal
-  }
-} else { // curMin == i1
-  if(v > v1 + v2) {
-    v
-  } else if(vlocal > v2) {
-    v1 + vlocal
-  }
-}
-
-
-
-
-
+### Algebra
 
 #### 70	Climbing Stairs	36.1%	Easy
-Climbing Stairs
-dp[i] = dp[i - 1] + dp[i - 2]
-dp[1] = 1
-dp[2] = 2
-斐波那契
+爬楼梯，每次一或两步，求可能的爬梯方法数
+
+	dp[i] = dp[i - 1] + dp[i - 2]
+	dp[1] = 1
+	dp[2] = 2
+
+可见是斐波那契数列
 
 ```
 def climb(n:Int) :Int = {
@@ -228,13 +153,38 @@ def climb(n:Int) :Int = {
 }
 ```
 
+#### 279	Perfect Squares	31.2%	Medium
+完全平方数序列1, 4, 9, 16, ... 任何数字都可以由完全平方数加和求得，求最小的加和数字的数量，如：
 
-http://blog.csdn.net/linhuanmars/article/details/22135231
-http://bangbingsyb.blogspot.com/2014/11/leetcode-unique-paths-i-ii.html
+对 n = 12 返回 3，因为 12 = 4 + 4 + 4，对 n = 13 返回 2 因为 13 = 4 + 9。
 
+	dp(n) = for(x <- squares(n)) to 1) min(1 + dp(n - x))
 
+```
+def squares(n: Int): List[Int] = {
+  var (i, list) = (2, List(1))
+  while (i * i <= n) {
+    list = i * i :: list
+    i = i + 1
+  }
+  list
+}
+
+def perfSquare(n: Int): Int = {
+  val sq = squares(n)
+  if (sq.head == n) 1
+  else sq.foldLeft(n) { (x, v) => min(perfSquare(n - v) + 1, x) }
+}
+```
+
+### Geometry
+
+路径数问题，参考：
+* http://blog.csdn.net/linhuanmars/article/details/22135231
+* http://bangbingsyb.blogspot.com/2014/11/leetcode-unique-paths-i-ii.html
 
 #### 62	Unique Paths	35.3%	Medium
+给定一个矩形，一个点在左上点，它只能向右或向下移动，求所有的路径可能数
 
 ```
 dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
@@ -255,6 +205,8 @@ def path(m:Int, n:Int) :Int = {
 ```
 
 #### 63	Unique Paths II	28.9%	Medium
+在前题的基础上，如果有障碍怎么处理
+
 如果有障碍，则dp[i][j]=0，需要传入一个辅助矩阵【大小必须为m*n】表示该点是否有障碍，如果有障碍，则obstacles(i)(j)=1
 
 ```
@@ -276,7 +228,9 @@ path(3, 10, arr)
 ```
 
 #### 64	Minimum Path Sum	34.1%	Medium
-和前面类似，只是矩阵带有权值，求权值和最小的路径，和前面类似，比较两种选择中最小的即可。
+和前题类似，只是矩阵带有权值，求权值和最小的路径
+
+解决方法也类似，只要比较两种选择中最小的即可。
 
 ```
 dp[i][j] = min(dp[i - 1][j] , dp[i][j - 1]) + arr[i][j]
@@ -332,12 +286,12 @@ tri.deep
 minpath(tri)
 ```
 
+### Tree
 
 #### 96	Unique Binary Search Trees	36.8%	Medium
-存储1到n的二叉树有多少种。
+存储1到n的二叉搜索树有多少种。
 
-令dp(n)表示包含n个节点的BST数量
-令f(k, n)表示以k为根节点且包含n个节点的BST数量，则
+令dp(n)表示包含n个节点的BST数量，令f(k, n)表示以k为根节点且包含n个节点的BST数量，则
 
 ```
 dp(n) = f(1, n) + dp(2, n) + ... + f(n)
@@ -359,37 +313,8 @@ def uniqBST(n : Int) : Int = {
 }
 ```
 
-
 #### 95	Unique Binary Search Trees II	28.8%	Medium
 将树生成出来
 todo
-
-#### 279	Perfect Squares	31.2%	Medium
-
-动态规划：从新手到专家
-http://www.hawstein.com/posts/dp-novice-to-advanced.html
-https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/
-
-
-dp(n) = for(x <- squares(n)) to 1) min(1 + dp(n - x))
-
-```
-def squares(n: Int): List[Int] = {
-  var i = 2
-  var list = List(1)
-  while (i * i <= n) {
-    list = i * i :: list
-    i = i + 1
-  }
-  list
-}
-
-def perfSquare(n: Int): Int = {
-  val sq = squares(n)
-  if (sq.head == n) 1
-  else sq.foldLeft(n) { (x, v) => min(perfSquare(n - v) + 1, x) }
-}
-
-```
 
 
