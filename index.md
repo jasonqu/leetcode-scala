@@ -284,7 +284,7 @@
 * [x] 35	[array](array.md)	Search Insert Position	36.8%	Medium
 * [x] 34	[array](array.md)	Search for a Range	28.6%	Medium
 * [todo?] 33	[array](array.md)	Search in Rotated Sorted Array	29.8%	Hard
-* [x] 32	[String](string.md)	Longest Valid Parentheses	22.1%	Hard
+* [x] 32	[Dynamic](dynamic.md)	Longest Valid Parentheses	22.1%	Hard
 * [ ] 31	Next Permutation	26.0%	Medium
 * [ ] 30	Substring with Concatenation of All Words	20.4%	Hard
 * [-] 29	[Math](math.md)	Divide Two Integers	15.4%	Medium

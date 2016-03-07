@@ -150,31 +150,6 @@ String在scala中可以被看做是一个Char的Array，因此也可以方便的
 	  valid
 	}
 
-#### 32	Longest Valid Parentheses	22.2%	Hard
-给定字符串中只包含 '(' 和 ')'，求最长的合法子序列
-
-参考dynamic 的 #53，关键是怎样算出local longest，其实只要知道`)`的个数就行了
-
-	def longestValidParentheses(str: String) : Boolean = {
-	  var list = List[Char]()
-	  var (global, local) = (0, 0)
-	  var i = 0
-	  while(i < str.length) {
-	    val c = str(i)
-	    if(c == '(') list = c :: list
-	    else list match {
-	      case Nil =>
-	        local = 0
-	      case head :: tail =>
-	        local = local + 2
-	        if(local > global) global = local
-	        list = tail
-	      case _ =>
-	    }
-	    i = i + 1
-	  }
-	  global
-	}
 
 #### 71	Simplify Path	21.5%	Medium
 "/a/./b/../../c/", => "/c"

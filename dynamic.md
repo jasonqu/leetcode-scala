@@ -131,6 +131,96 @@ todo
 
 
 
+
+### String
+
+#### 32 Longest Valid Parentheses 22.2% Hard
+给定字符串中只包含 '(' 和 ')'，求最长的合法子序列
+
+参考dynamic 的 #53，关键是怎样算出local longest，其实只要知道`)`的个数就行了
+
+  def longestValidParentheses(str: String) : Boolean = {
+    var list = List[Char]()
+    var (global, local) = (0, 0)
+    var i = 0
+    while(i < str.length) {
+      val c = str(i)
+      if(c == '(') list = c :: list
+      else list match {
+        case Nil =>
+          local = 0
+        case head :: tail =>
+          local = local + 2
+          if(local > global) global = local
+          list = tail
+      }
+      i = i + 1
+    }
+    global
+  }
+
+#### 72  Edit Distance 28.0% Hard
+从str1 到 str2 的操作数，其中可选的操作是删除一个字符、添加一个字符、替换一个字符。
+非常经典的DP问题，描述见[wiki](https://en.wikipedia.org/wiki/Edit_distance)
+
+dp[i, j] = if(str1(i) == str2(j)) dp[i - 1, j - 1]
+           else min(dp[i, j - 1], dp[i - 1, j], dp[i - 1, j - 1]) + 1
+dp[0, 0] = 0
+dp[0, j] = j, dp[i, 0] = i
+dp[0, 1] = dp[1, 0] = dp[1, 1] = 1
+
+def editDistance(str1:String, str2:String) :Int = {
+val state = new Array[Array[Int]](str1.length + 1)
+  val state = Array.fill[Array[Int]](str1.length + 1)
+                 (Array.fill[Int](str2.length + 1)(0))
+for(i <- 0 to str1.length) state(i)(0) = i
+for(j <- 0 to str2.length) state(0)(j) = j
+
+for(i <- str1.indices;
+    j <- str2.indices
+) {
+  if(str1(i) == str2(j)) state(i + 1)(j + 1) = state(i)(j)
+  else {
+    state(i + 1)(j + 1) = min(state(i)(j)
+      min(state(i-1)(j), state(i)(j-1)) + 1
+  }
+}
+
+state(str1.length)(str2.length)
+
+
+#### 115 Distinct Subsequences 28.2% Hard
+ABCDE AEC -> 0
+ABCDE ACE -> 1
+rabbbit rabbit -> 3
+
+11111 00001 00000
+11111 00111 00001
+rabbbit rabbit 
+1111111
+0111111
+0012333
+0001333
+0000333
+0000033
+
+
+def distinctSubSequeces(str1:String, str2:String) :Int = {
+  val state = Array.fill[Int](str1.length)(0)
+
+var (i, j) = (0, 0)
+while(i < str2.length) {
+var numOfPrefix = 0
+var j = i
+while(j < str1.length)
+  if(str1(j) == str2(i)) nums = nums + state(i - 1)(j - 1)
+  state(i)(j) = nums 
+}
+}
+state(str1.length )
+todo
+
+
 ### Algebra
 
 #### 70	Climbing Stairs	36.1%	Easy
@@ -152,6 +242,26 @@ def climb(n:Int) :Int = {
   state._2
 }
 ```
+
+#### 91  Decode Ways 17.2% Medium
+将字符转为数字：A->1、B->2...Z->26，解码时有多少种可能？例如 12 可以解码为AB或L
+
+dp[i] = if(str(i) < 7 && str(i-1) < 3) dp[i - 1] + dp[i - 2]
+        else dp[i - 1]
+dp[0] = dp[1] = 1
+
+```
+def decodeWays(str:String): Int = {
+  var state = (1, 1)
+  for(i <- 2 until str.length + 1) {
+    val (x, y) = state
+    state = if(str(i - 1) < '7' && str(i - 2) < '3') (y, x + y)
+    else (y, y)
+  }
+  state._2
+}
+```
+
 
 #### 279	Perfect Squares	31.2%	Medium
 完全平方数序列1, 4, 9, 16, ... 任何数字都可以由完全平方数加和求得，求最小的加和数字的数量，如：
