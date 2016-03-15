@@ -1,7 +1,46 @@
 
+combination
 
 
 
+递归 效率需要改进 todo
+
+```
+def comb( last:Int,k:Int, n:Int,thisList:List[Int] , list:List[List[Int]] ): List[List[Int]] ={
+println(s"$last $k $n $thisList $list")
+  if(k == 0)  return thisList :: list
+
+  if(last >= n) return list
+
+  var l = list
+  for(i <- last + 1 to n) {
+    l = comb(i, k - 1, n, i :: thisList, l)
+  }
+  return l
+}
+
+comb(0, 2, 4, Nil, Nil)
+```
+
+
+Combination Sum
+求某集合中所有给定和为目标的组合，数字可以出现多次
+参见dynamix 279
+所有可能就通过遍历获取了
+
+Combination Sum II
+每个数字只能出现一次
+参考上一题
+
+
+
+letter combanition of phone
+笛卡尔积
+
+
+permutation
+笛卡尔积之后filter一下就可以了？
+n^k - n!/n-k!
 
 
 
