@@ -102,10 +102,16 @@ comb(2, 4).toList
 参见dynamic 279
 所有可能就可以通过遍历获取了
 
-def combsum(target: Int, set:List[Int], thisList: List[Int], list: List[List[Int]]): List[List[Int]] = {
+def combsum(target: Int, currentIndex:Int, set:Seq[Int], thisList: List[Int], list: List[List[Int]]): List[List[Int]] = {
   if(thisList.sum > target) list
   if(thisList.sum == target) thisList :: list
-  else set.foldLeft(list) { (l, v) => combsum(target - v, set, ) }
+  else {
+  var l = list
+  for(i <- currentIndex until set.size)
+    l = combSum(target, i, set, set(i) :: thisList, l)
+  l
+  //set.foldLeft(list) { (l, v) => combsum(target - v, set, ) }
+  }
 }
 
 
@@ -115,16 +121,83 @@ def combsum(target: Int, set:List[Int], thisList: List[Int], list: List[List[Int
 * [ ] 40	Combination Sum II	26.9%	Medium
 每个数字只能出现一次
 参考上一题
+只需要在递归调用时保证currentIndex + 1即可
+
+def combsum(target: Int, currentIndex:Int, set:Seq[Int], thisList: List[Int], list: List[List[Int]]): List[List[Int]] = {
+  if(thisList.sum > target) list
+  if(thisList.sum == target) thisList :: list
+  else {
+  var l = list
+  for(i <- currentIndex until set.size)
+    l = combSum(target, i + 1, set, set(i) :: thisList, l)
+  l
+  //set.foldLeft(list) { (l, v) => combsum(target - v, set, ) }
+  }
+}
+
 
 http://stackoverflow.com/questions/10115967/whats-the-most-memory-efficient-way-to-generate-the-combinations-of-a-set-in-py
 
 letter combanition of phone
 笛卡尔积
 
+[a,b] x [1,2,3] x [x,y,z]
+
+```
+def p(z:List[Seq[Char]]):Seq[String] = {
+  z.foldRight(Seq[String]()) {(x, l) =>
+    l match {
+      case Nil => x.map(_.toString)
+      case _ => x.flatMap(c => l.map(c + _))
+    }
+  }
+}
+
+p(Seq('a','b','c') :: Seq('x','y','z') :: Nil)
+```
+
+todo 简化scala内建？
+
+
 
 permutation
+Given a collection of distinct numbers, return all possible permutations.
+
+For example,
+[1,2,3] have the following permutations:
+[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], and [3,2,1].
+
+
 笛卡尔积之后filter一下就可以了？
 n^k - n!/n-k!
+效率太低了
+
+```
+def p(set:Set[Int], thisList: List[Int], list:List[List[Int]]):List[List[Int]] = {
+  if(set.isEmpty) thisList :: list
+  else set.foldLeft(list){(l,x) => p(set - x, x:: thisList, l)}
+}
+
+p(Set(1,2,3, 4), Nil, Nil)
+```
+
+
+
+permutation II
+如果在集合中有重复的数字，求排列的集合
+求perm之后在distinct一下
+
+优化？
+
+
+
+
+
+
+
+
+
+
 
 
 
