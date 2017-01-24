@@ -326,6 +326,40 @@ If S = [1,2,2], a solution is: [ [2], [1], [1,2,2], [2,2], [1,2], [] ]
 
 
 
+### sort.md
+
+two sum
+求数组中加和为target的数对
+
+val set = x.zipWithIndex.toMap
+set.filter(_._1 <= target/2).filter(set.contains(target -_._1)).map(_._)
+
+two sum with 2 index
+arr
+首先二分找到target或比target小的第一个下标
+然后左右分别处理
+
+
+3sum
+排好序后，使用三个指针
+index1， index2 和indexMax
+每次只加最小的，是否可行？
+-4 -1 -1 0 1 2
+if(index1 == index2 - 1) index2 = index2 + 1
+
+不可行，还是相当于n^2
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

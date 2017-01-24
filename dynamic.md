@@ -163,12 +163,15 @@ todo
 从str1 到 str2 的操作数，其中可选的操作是删除一个字符、添加一个字符、替换一个字符。
 非常经典的DP问题，描述见[wiki](https://en.wikipedia.org/wiki/Edit_distance)
 
+```
 dp[i, j] = if(str1(i) == str2(j)) dp[i - 1, j - 1]
            else min(dp[i, j - 1], dp[i - 1, j], dp[i - 1, j - 1]) + 1
 dp[0, 0] = 0
 dp[0, j] = j, dp[i, 0] = i
 dp[0, 1] = dp[1, 0] = dp[1, 1] = 1
+```
 
+```
 def editDistance(str1:String, str2:String) :Int = {
 val state = new Array[Array[Int]](str1.length + 1)
   val state = Array.fill[Array[Int]](str1.length + 1)
@@ -187,6 +190,8 @@ for(i <- str1.indices;
 }
 
 state(str1.length)(str2.length)
+```
+
 
 
 #### 115 Distinct Subsequences 28.2% Hard
@@ -315,7 +320,8 @@ def path(m:Int, n:Int) :Int = {
 ```
 
 另外就是使用排列组合的公式方式解决：
-一共m-1+n-1步，其中任意选择m-1作为竖着走即可 —— 即 C(m-1 + n-1, m-1);
+
+* 一共m-1+n-1步，其中任意选择m-1作为竖着走即可 —— 即 C(m-1 + n-1, m-1);
 
 #### 63	Unique Paths II	28.9%	Medium
 在前题的基础上，如果有障碍怎么处理
